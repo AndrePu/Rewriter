@@ -1,0 +1,113 @@
+﻿<Window x:Class="Rewriter.ManualEdit" x:Name="Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" 
+        xmlns:local="clr-namespace:Rewriter"
+        mc:Ignorable="d"
+     Title="Manual edit" Height="480" Width="640" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
+
+    <Grid x:Name="HeadGrid">
+
+        <Image Source="Resources/Back.png" Height="50" Width="50" 
+               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" MouseDown="Image_MouseDown" Cursor="Hand">
+
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <ei:ChangePropertyAction PropertyName="Effect">
+                        <ei:ChangePropertyAction.Value>
+                            <ee:ColorToneEffect DarkColor="#FF464646" LightColor="#FF464646"/>
+                        </ei:ChangePropertyAction.Value>
+                    </ei:ChangePropertyAction>
+                </i:EventTrigger>
+
+                <i:EventTrigger EventName="MouseLeave">
+                    <ei:ChangePropertyAction PropertyName="Effect"/>
+                </i:EventTrigger>
+
+            </i:Interaction.Triggers>
+
+
+        </Image>
+
+        <Viewbox>
+            <Grid x:Name="MainGrid" Width="634" Height="450.4">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="209*"/>
+                    <RowDefinition Height="241*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="434"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle Height="Auto" Width="200" HorizontalAlignment="Right" Fill="#FF9600BC" Stroke="White" StrokeThickness="2" Grid.Column="1" Grid.RowSpan="2"/>
+
+                <!--#region Main word info block-->
+                <TextBlock x:Name ="modeName_textBlock" Text="Mistakes correcting" Height="25" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="13.998,15,13.998,0"
+                           FontFamily="Nirmalaya UI" FontSize="18" FontWeight="Bold" Foreground="White"/>
+
+                <Rectangle Grid.Column="1" HorizontalAlignment="Center" Height="120" Margin="5,46.387,5,0" Stroke="#FF5B0073" StrokeThickness="2" VerticalAlignment="Top" Width="190">
+                    <Rectangle.Effect>
+                        <ee:EmbossedEffect Color="#FF9600BC"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <StackPanel x:Name="word_stackpanel" Height="16" Width="175" Grid.Column="1"  HorizontalAlignment ="Left"  VerticalAlignment="Top" Margin="10,55,0,0" Orientation="Horizontal">
+
+                    <TextBlock x:Name="wordPinned_textBlock" Text="Word: " HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock x:Name="word_textBlock" Text="Some_word_to_edit" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Nirmalaya UI" FontSize="14" Foreground="White"/>
+
+                </StackPanel>
+
+                <TextBlock x:Name="sentence_textBlock" Height="Auto" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Nirmalaya UI" FontSize="14" Foreground="White" Grid.Column="1" TextWrapping="Wrap" Margin="10,81,0,0"><Run x:Name="sentencePinned" Text="In sentence: "  FontWeight="Bold" />
+                    <Run x:Name="sentence" Text="I have lost my teeth." FontStyle="Italic"/></TextBlock>
+
+                <!--#endregion-->
+
+                <!--#region Correct word block (AI)-->
+
+                <TextBlock x:Name ="correct_textBlock" Text="Variants to correct" Height="25" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Margin="13.698,180,13.698,0"
+                    FontFamily="Nirmalaya UI" FontSize="18" FontWeight="Bold" Foreground="White"/>
+
+                <Label x:Name ="firstVariant_label" Height="28" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,5,0,0" 
+                    Content="1: First variant" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="White" BorderThickness="2" />
+
+                <Label x:Name ="secondVariant_label" Height="28" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,43,0,0" 
+                    Content="2: Second variant" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="White" BorderThickness="2" />
+
+                <Label x:Name ="thirdVariant_label" Height="28" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,81,0,0" 
+                    Content="3: Third variant" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="White" BorderThickness="2" />
+
+                <!--#endregion-->
+
+                <!--#region Correct word block (own variants)-->
+                <Label x:Name ="addWord_label" Height="30" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,129,0,0" 
+                    Content="Add to vocabulary" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="White" BorderThickness="2" />
+
+                <Label x:Name ="ownVar_label" Height="28" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,167,0,0" 
+                    Content="Add own variant" FontFamily="Nirmalaya UI" FontSize="14" FontWeight="Bold" Foreground="White" BorderBrush="White" BorderThickness="2" />
+
+                <TextBox x:Name="ownVar_textBox" Text="Please,enter your variant.." FontFamily="Arial Rounded MT Bold" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="12" Foreground="Black"
+                        BorderThickness="2" Height="25" Width="170" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,205,0,0" >
+                    <TextBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF00C500" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </TextBox.BorderBrush>
+                </TextBox>
+                <Path Grid.Column="1" Data="M434.77431,329.16559 L630.79591,329.16559" HorizontalAlignment="Left" Height="1" Margin="0,119,0,0" Grid.Row="1" Stretch="Fill" Stroke="White" StrokeThickness="1" VerticalAlignment="Top" Width="200"/>
+                <Path Grid.Column="1" Data="M434.77431,329.16559 L630.79591,329.16559" HorizontalAlignment="Left" Height="1" Margin="0,170,0,0" Stretch="Fill" Stroke="White" StrokeThickness="1" VerticalAlignment="Top" Width="200"/>
+
+                <!--#endregion-->
+
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Window>

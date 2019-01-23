@@ -25,6 +25,15 @@ namespace Rewriter
             InitializeComponent();
             SetLanguage();
             SetWindowConfiguration();
+
+           // text_textBox.Text = Document.Text;
+            sentence.Text = Document.Sentences[0] + '.';
+
+
+            foreach (string w in Vocabulary.words)
+            {
+                text_textBox.Text += w + ", ";
+            }
         }
 
         #region Window size setting
@@ -41,8 +50,8 @@ namespace Rewriter
         }
         #endregion
 
-        #region Setting language for this Window
-
+        #region Setting language for this Window  
+        // ДОДЕЛАТЬ БЛОК !!!!!!!!!!!!!!!!!!!
         private void SetLanguage()
         {
             switch (AppLanguage.language)
@@ -65,7 +74,7 @@ namespace Rewriter
 
         private void SetEnglish()
         {
-            
+           
         }
 
         private void SetRussian()
@@ -109,7 +118,12 @@ namespace Rewriter
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if ( MessageBox.Show("Do you really want to interrupt editing process? Correction process will not be saved!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                CheckMenuWindow checkWind = new CheckMenuWindow();
+                checkWind.Show();
+                this.Close();
+            }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

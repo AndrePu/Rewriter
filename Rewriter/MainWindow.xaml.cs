@@ -27,6 +27,7 @@ namespace Rewriter
             
             if (first_run) // Loading main vocabulary to program
             {
+                first_run = false;
                 Thread vocLoad = new Thread(LoadMainVocabulary);
                 vocLoad.Start();
             }
@@ -43,6 +44,8 @@ namespace Rewriter
             {
                 Vocabulary.words.Add(word.Word);
             }
+
+            Vocabulary.QuickSort(0, Vocabulary.words.Count-1);      // Sort all our values
         }
         #endregion
 
@@ -55,7 +58,6 @@ namespace Rewriter
             if (first_run)
             {
                 this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                first_run = false;
             }
             else
             {

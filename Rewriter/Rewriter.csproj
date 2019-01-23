@@ -107,12 +107,6 @@
     <Compile Include="Configuration\WindowConfiguration.cs" />
     <Compile Include="Entity\WordContext.cs" />
     <Compile Include="Entity\Words.cs" />
-    <Compile Include="ExForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ExForm.Designer.cs">
-      <DependentUpon>ExForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>

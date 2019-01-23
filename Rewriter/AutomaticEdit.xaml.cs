@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Rewriter.Configuration;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Rewriter
 {
@@ -24,6 +26,7 @@ namespace Rewriter
         {
             InitializeComponent();
             SetLanguage();
+            SetTextInfo();
         }
 
 
@@ -90,6 +93,68 @@ namespace Rewriter
 
         #endregion
 
+        /// <summary>
+        /// Setting document info to the labels
+        /// </summary>
+        private void SetTextInfo()
+        {
+            symbAmount_textBlock.Text = Document.symbolsAmount.ToString();
+            wordsAmount_textBlock.Text = Document.wordsAmount.ToString();
+            senAmount_textBlock.Text = Document.sentencesAmount.ToString();
+            wordsChecked_textBlock.Text = Document.wordsCheckedAmount.ToString();
+            wordsCorrected_textBlock.Text = Document.wordsCorrectedAmount.ToString();
 
+            progressBar.Value = Document.wordsCheckedAmount*100 / Document.wordsAmount;
+        }
+        private void ProcessForm()
+        {
+            Thread checkText = new Thread(CheckText);
+
+            checkText.Start();
+        }
+        private void CheckText()
+        {
+            Thread.Sleep(0);
+            AutoCorrectMistakes();
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Title = "Save processed file..";
+            saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            saveFileDialog1.DefaultExt = ".txt";
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // получаем выбранный файл
+                string filename = saveFileDialog1.FileName;
+                // сохраняем текст в файл
+                System.IO.File.WriteAllText(filename, Document.Text);
+            }
+
+            this.Close();
+        }
+
+        private void AutoCorrectMistakes()
+        {
+            for (int i = 0; i < Document.sentencesAmount; i++)
+            {
+                for (int j = 0; j < Document.words[i].Count; j++)
+                {
+                    if (Vocabulary.Contains(Document.words[i][j]) == false)
+                    {
+                        string correct_word = Vocabulary.CorrectWord(Document.words[i][j]);
+                        Document.Text = Document.Text.Replace(Document.words[i][j], correct_word);
+                        Document.wordsCorrectedAmount++;
+                    }
+                    Document.wordsCheckedAmount++;
+                }
+                //SetTextInfo();
+                //Thread.Sleep(300);
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckText();
+        }
     }
 }

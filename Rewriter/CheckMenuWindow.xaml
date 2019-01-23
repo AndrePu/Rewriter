@@ -90,7 +90,7 @@
                 <!-- Icon was made by from flaticon.com-->
                 <Image x:Name="upload_image" Source="Resources/Upload.png" Height="55" Width="55"  HorizontalAlignment="Center" Margin="0,24,0,36" Grid.Row="1" Grid.Column="1"/>
 
-                <Rectangle x:Name="upload_rectME" HorizontalAlignment="Left" Height="120" Width="120" Grid.RowSpan="3" VerticalAlignment="Top" Opacity="0.1" Grid.Row="1" Grid.Column="1" Visibility="Hidden">
+                <Rectangle x:Name="upload_rectME" HorizontalAlignment="Left" Height="120" Width="120" Grid.RowSpan="3" VerticalAlignment="Top" Opacity="0.1" Grid.Row="1" Grid.Column="1" Visibility="Hidden" MouseDown="upload_rectME_MouseDown">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseEnter" SourceName="upload_image">
                             <ei:ChangePropertyAction PropertyName="Visibility"/>
@@ -220,7 +220,7 @@
             </Grid>
         </Viewbox>
 
-        <TextBlock x:Name="fileUploaded_textBlock" HorizontalAlignment="Left" Height="33.621" Margin="140,0,0,5" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmala UI" FontSize="24" FontWeight="Bold" Foreground="White"><Run FontWeight="Normal" Text="None"/></TextBlock>
+        <TextBlock x:Name="fileUploaded_textBlock" HorizontalAlignment="Left" Height="Auto" Margin="140,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmala UI" FontSize="18" FontWeight="Bold" Foreground="White"><Run FontWeight="Normal" Text="None"/></TextBlock>
         <TextBlock x:Name="document_TextBlock" HorizontalAlignment="Left" Height="33.621" Margin="10,0,0,5" TextWrapping="Wrap" Text="Document:" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmala UI" FontSize="24" FontWeight="Bold" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"/>
 
     </Grid>

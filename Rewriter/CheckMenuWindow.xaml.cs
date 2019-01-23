@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Rewriter.Configuration;
+using System.Windows.Forms;
 
 namespace Rewriter
 {
@@ -20,11 +21,17 @@ namespace Rewriter
     /// </summary>
     public partial class CheckMenuWindow : Window
     {
+        OpenFileDialog openFileDialog1 = new OpenFileDialog();
         public CheckMenuWindow()
         {
             InitializeComponent();
             SetLanguage();
             SetWindowConfiguration();
+
+            openFileDialog1.Title = "Open file to work with..";
+            openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            openFileDialog1.DefaultExt = ".txt";
+           
         }
 
         #region Window size setting
@@ -84,7 +91,7 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 27);
 
             document_TextBlock.Text = "Document:";
-            fileUploaded_textBlock.Text = Document.Name;
+            fileUploaded_textBlock.Text = Document.Filename;
         }
 
         private void SetRussian()
@@ -107,7 +114,7 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
 
             document_TextBlock.Text = "Документ:";
-            fileUploaded_textBlock.Text = Document.Name;
+            fileUploaded_textBlock.Text = Document.Filename;
         }
 
         private void SetUkrainian()
@@ -130,13 +137,13 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
 
             document_TextBlock.Text = "Документ:";
-            fileUploaded_textBlock.Text = Document.Name;
+            fileUploaded_textBlock.Text = Document.Filename;
         }
 
         #endregion
 
         #region Interactivity
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
@@ -186,11 +193,8 @@ namespace Rewriter
             WindowConfiguration.Top = this.Top;
         }
         #endregion
+        
 
-        private void upload_button_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
 
         private void auto_rectME_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -200,7 +204,7 @@ namespace Rewriter
                 auto_edit.Show();
             }
             else
-                MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void manual_rectME_MouseDown(object sender, MouseButtonEventArgs e)
@@ -213,8 +217,29 @@ namespace Rewriter
             }
             else
             {
-                MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void upload_rectME_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                return;
+
+            // Get chosen file
+            Document.Filename = openFileDialog1.FileName;
+            fileUploaded_textBlock.Text = Document.Filename;
+
+            // Read content of file to string
+            Document.Text = System.IO.File.ReadAllText(Document.Filename, Encoding.GetEncoding(1251));
+
+
+            string clear_text = Document.Text.Replace("\n", "").Replace("\r", ""); // text without \n and \r symbols
+            Document.Sentences = clear_text.Remove(clear_text.Length - 1).Split('!', '?', '.');
+
+            Document.FormWordsToCheck();           // Choose words from sentences that needed to be edited
+
+            Document.MakeInfo();                     // Makes information about document
         }
     }
 }

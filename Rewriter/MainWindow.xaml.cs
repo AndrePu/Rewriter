@@ -8,6 +8,7 @@ using Rewriter.Configuration;
 using Rewriter.Entity;
 using System.Data.Entity;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace Rewriter
 {
@@ -27,25 +28,27 @@ namespace Rewriter
             
             if (first_run) // Loading main vocabulary to program
             {
-                first_run = false;
-                Thread vocLoad = new Thread(LoadMainVocabulary);
-                vocLoad.Start();
+                LoadMainVocabulary();
             }
         }
 
         #region Loading main vocabulary
-        private void LoadMainVocabulary()
+        private async void LoadMainVocabulary()
         {
-            Vocabulary.db = new WordContext();
-
-            Vocabulary.db.words.Load();
-
-            foreach (Words word in Vocabulary.db.words) // loading all the words to the comfortable data structure to work
+            await Task.Run(() =>
             {
-                Vocabulary.words.Add(word.Word);
-            }
+                Vocabulary.db = new WordContext();
 
-            Vocabulary.QuickSort(0, Vocabulary.words.Count-1);      // Sort all our values
+                Vocabulary.db.words.Load();
+
+                foreach (Words word in Vocabulary.db.words) // loading all the words to the comfortable data structure to work
+                {
+                    Vocabulary.words.Add(word.Word);
+                }
+
+                Vocabulary.QuickSort(0, Vocabulary.words.Count - 1);      // Sort all our values
+                MessageBox.Show("Database was loaded!");
+            });
         }
         #endregion
 

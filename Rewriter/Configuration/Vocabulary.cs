@@ -87,10 +87,10 @@ namespace Rewriter.Configuration
         }
         #endregion
 
-        #region
+        #region Correction word methods
         public static string CorrectWord(string word)
-        {
-            string corrected_word = "Mima";
+        {   // WRITE ALGORITHM OF CORRECTION WORDS
+            string corrected_word = "Corrected";
 
             return corrected_word;
         }

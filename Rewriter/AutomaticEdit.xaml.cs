@@ -22,6 +22,7 @@ namespace Rewriter
     /// </summary>
     public partial class AutomaticEdit : Window
     {
+        object locked = new object();
         public AutomaticEdit()
         {
             InitializeComponent();
@@ -98,13 +99,16 @@ namespace Rewriter
         /// </summary>
         private void SetTextInfo()
         {
-            symbAmount_textBlock.Text = Document.symbolsAmount.ToString();
-            wordsAmount_textBlock.Text = Document.wordsAmount.ToString();
-            senAmount_textBlock.Text = Document.sentencesAmount.ToString();
-            wordsChecked_textBlock.Text = Document.wordsCheckedAmount.ToString();
-            wordsCorrected_textBlock.Text = Document.wordsCorrectedAmount.ToString();
+            lock (locked)
+            {
+                symbAmount_textBlock.Text = Document.symbolsAmount.ToString();
+                wordsAmount_textBlock.Text = Document.wordsAmount.ToString();
+                senAmount_textBlock.Text = Document.sentencesAmount.ToString();
+                wordsChecked_textBlock.Text = Document.wordsCheckedAmount.ToString();
+                wordsCorrected_textBlock.Text = Document.wordsCorrectedAmount.ToString();
 
-            progressBar.Value = Document.wordsCheckedAmount*100 / Document.wordsAmount;
+                progressBar.Value = Document.wordsCheckedAmount * 100 / Document.wordsAmount;
+            }
         }
         private void ProcessForm()
         {
@@ -112,10 +116,10 @@ namespace Rewriter
 
             checkText.Start();
         }
-        private void CheckText()
+        private async void CheckText()
         {
             Thread.Sleep(0);
-            AutoCorrectMistakes();
+            await Task.Run(() => AutoCorrectMistakes());
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Title = "Save processed file..";
@@ -147,7 +151,7 @@ namespace Rewriter
                     }
                     Document.wordsCheckedAmount++;
                 }
-                //SetTextInfo();
+                SetTextInfo();
                 //Thread.Sleep(300);
             }
         }

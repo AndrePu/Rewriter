@@ -9,9 +9,9 @@
         Icon="Resources/logo_icon.ico" Background="#FF9600BC"
         KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
 
-
     <Window.Resources>
 
+        <!--#region Creating a style for button template-->
         <!--Making colors template for button events-->
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FF9600BC"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FFFFFF"/>
@@ -24,7 +24,6 @@
         <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
         <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 
-        <!--Creating a style for button template-->
         <Style TargetType="{x:Type Button}">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -63,12 +62,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
 
-        <!--Creating style for image-->
+        <!--#region Creating style for image-->
         <Style TargetType="{x:Type Image}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
+        <!--#endregion-->
+        
     </Window.Resources>
 
     <Viewbox>

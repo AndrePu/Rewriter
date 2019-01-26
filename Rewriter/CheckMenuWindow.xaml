@@ -8,222 +8,288 @@
         mc:Ignorable="d"
         Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize"
     KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
-    
+
     <Window.Background>
         <ImageBrush ImageSource="Resources/Background2.png"/>
     </Window.Background>
 
+    <Window.Resources>
+
+        <!--#region Rectangle template-->
+        <Style TargetType="{x:Type Rectangle}">
+            <Setter Property="Height" Value="120"/>
+            <Setter Property="Width" Value="120" />
+            <Setter Property="StrokeThickness" Value="0"/>
+            <Setter Property="Stroke" Value="White"/>
+        </Style>
+        <!--#endregion -->
+
+        <!--#region textBlock template-->
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontFamily" Value="Nirmala UI" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <!--#endregion-->
+        
+        <!--#region Label template-->
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF232323"/>
+            <Setter Property="BorderBrush" Value="#FF747474"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <!--#endregion-->
+        
+    </Window.Resources>
+    
     <!--Making two grids in order not to increase some objects in size and bind them to headGrid -->
-    <Grid x:Name="HeadGrid">
-        <Image Source="Resources/Back.png" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" MouseDown="Image_MouseDown" Cursor="Hand">
+        <Grid x:Name="HeadGrid">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition  Height="1*" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="5" />
+        </Grid.RowDefinitions>
 
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="MouseEnter">
-                    <ei:ChangePropertyAction PropertyName="Effect">
-                        <ei:ChangePropertyAction.Value>
-                            <ee:ColorToneEffect DarkColor="#FF464646" LightColor="#FF464646"/>
-                        </ei:ChangePropertyAction.Value>
-                    </ei:ChangePropertyAction>
-                </i:EventTrigger>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
 
-                <i:EventTrigger EventName="MouseLeave">
-                    <ei:ChangePropertyAction PropertyName="Effect"/>
-                </i:EventTrigger>
+            <Image Source="Resources/Back.png" Cursor ="Hand" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" >
 
-            </i:Interaction.Triggers>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseEnter">
+                        <ei:ChangePropertyAction PropertyName="Effect">
+                            <ei:ChangePropertyAction.Value>
+                                <ee:ColorToneEffect DarkColor="#FF464646" LightColor="#FF464646"/>
+                            </ei:ChangePropertyAction.Value>
+                        </ei:ChangePropertyAction>
+                    </i:EventTrigger>
+
+                    <i:EventTrigger EventName="MouseLeave">
+                        <ei:ChangePropertyAction PropertyName="Effect"/>
+                    </i:EventTrigger>
+
+                </i:Interaction.Triggers>
+
+            </Image>
+
+        <TextBlock x:Name="fileUploaded_textBlock" Height="25" Text="None" FontSize="20" VerticalAlignment="Center" Grid.Row="3" Grid.Column="3"/>
+        <TextBlock x:Name="document_TextBlock" Height="30" Text="Document:" FontSize="24" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"/>
 
 
-        </Image>
-        <Viewbox>
-            <Grid x:Name="MainGrid" Width="634" Height="450.4">
+            <Viewbox Grid.RowSpan="4" Grid.ColumnSpan="4">
+                <Grid Width="634" Height="450.8">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="117*"/>
-                    <ColumnDefinition Width="120*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="120*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="120*"/>
-                    <ColumnDefinition Width="117*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="117"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="117"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="115.2*"/>
-                    <RowDefinition Height="120"/>
-                    <RowDefinition Height="115.2*"/>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="115.2*"/>
+                        <RowDefinition Height="120"/>
+                        <RowDefinition Height="115.2*"/>
+                    </Grid.RowDefinitions>
 
-                <!--Creating buttons with help of rectangle, images and textblocks -->
-                <Rectangle x:Name="manual_rect" Height="120" Width="120" HorizontalAlignment ="Right" VerticalAlignment="Center" Fill="#FF4267B2" Grid.Row="1" Grid.Column="5" Stroke="White" StrokeThickness="0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="manual_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="manual_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Rectangle>
+                <!--#region Creating buttons with help of rectangle, images and textblocks -->
+                    
+                    <!--#region Button frames-->
+                    <Rectangle x:Name="manual_rect" Fill="#FF4267B2" Grid.Row="1" Grid.Column="5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="manual_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="manual_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
 
-                <Rectangle x:Name="auto_rect" Height="120" Width="120" VerticalAlignment="Center" Fill="#FF107C10"  Grid.Row="1" Grid.Column="3" Stroke="White" StrokeThickness="0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="auto_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="auto_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Rectangle>
+                    <Rectangle x:Name="auto_rect" Fill="#FF107C10"  Grid.Row="1" Grid.Column="3">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="auto_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="auto_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
 
-                <Rectangle x:Name="upload_rect" Height="120" Width="120" HorizontalAlignment ="Left" VerticalAlignment="Center" Fill="#FFDC3C00"  Grid.Row="1" Grid.Column="1" Stroke="White" StrokeThickness="0">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="upload_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="upload_rectME">
-                            <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Rectangle>
+                    <Rectangle x:Name="upload_rect" Fill="#FFDC3C00" Grid.Row="1" Grid.Column="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="upload_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="upload_rectME">
+                                <ei:ChangePropertyAction PropertyName="StrokeThickness" Value="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Rectangle>
+                <!--#endregion-->
 
-                <Image x:Name="manual_image" Source="Resources/tap.png" Height="65" Width="65" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="5" Margin="0,17.5,0,37.5"/>
-                <Image x:Name="auto_image" Source="Resources/Bot.png" Height="70" Width="70" HorizontalAlignment="Center" Margin="0,17,0,33" Grid.Row="1" Grid.Column="3"/>
-                <!-- Icon was made by from flaticon.com-->
-                <Image x:Name="upload_image" Source="Resources/Upload.png" Height="55" Width="55"  HorizontalAlignment="Center" Margin="0,24,0,36" Grid.Row="1" Grid.Column="1"/>
+                    <!--#region Button Images-->
+                <Image x:Name="manual_image" Source="Resources/tap.png" Height="65" Width="65" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="5" Margin="0,17.5,0,37.5"/>
+                <Image x:Name="auto_image" Source="Resources/Bot.png" Height="70" Width="70" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="3" Margin="0,17,0,33"/><!-- Icon was taken from flaticon.com-->
+                <Image x:Name="upload_image" Source="Resources/Upload.png" Height="55" Width="55"  HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,24,0,36"/>
+                <!--#endregion-->
+                    
+                    <!--#region Button rectangles when MouseEnter event started-->
+                    <Rectangle x:Name="upload_rectME" Opacity="0.1" Grid.Row="1" Grid.Column="1" Visibility="Hidden" MouseDown="upload_rectME_MouseDown">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="upload_image">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="upload_rect">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Rectangle.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
 
-                <Rectangle x:Name="upload_rectME" HorizontalAlignment="Left" Height="120" Width="120" Grid.RowSpan="3" VerticalAlignment="Top" Opacity="0.1" Grid.Row="1" Grid.Column="1" Visibility="Hidden" MouseDown="upload_rectME_MouseDown">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="upload_image">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="upload_rect">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseLeave">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Rectangle.Fill>
-                        <RadialGradientBrush>
-                            <GradientStop Color="Black" Offset="0"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
+                    <Rectangle x:Name="auto_rectME" Opacity="0.15" Grid.Row="1" Grid.Column="3" Visibility="Hidden" MouseDown="auto_rectME_MouseDown">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="auto_rect">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="auto_image">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Rectangle.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
 
-                <Rectangle x:Name="auto_rectME" HorizontalAlignment="Left" Height="120" Width="120" Grid.RowSpan="3" VerticalAlignment="Top" Opacity="0.15" Grid.Row="1" Grid.Column="3" Visibility="Hidden" MouseDown="auto_rectME_MouseDown">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="auto_rect">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="auto_image">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Rectangle.Fill>
-                        <RadialGradientBrush>
-                            <GradientStop Color="Black" Offset="0"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
+                <Rectangle x:Name="manual_rectME" Opacity="0.15" Visibility="Hidden" Grid.Row="1" Grid.Column="5" MouseDown="manual_rectME_MouseDown">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="manual_rect">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="manual_image">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Rectangle.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <!--#endregion-->
 
-                <Rectangle x:Name="manual_rectME" HorizontalAlignment="Left" Height="120" Width="120" Grid.RowSpan="3" VerticalAlignment="Top" Opacity="0.15" Grid.Row="1" Grid.Column="5" Visibility="Hidden" MouseDown="manual_rectME_MouseDown">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="manual_rect">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="manual_image">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <Rectangle.Fill>
-                        <RadialGradientBrush>
-                            <GradientStop Color="Black"/>
-                            <GradientStop Color="White" Offset="1"/>
-                        </RadialGradientBrush>
-                    </Rectangle.Fill>
-                </Rectangle>
+                    <!--#region Button text-->
+                    <TextBlock x:Name="upload_textBlock" Text="Upload File"  Height="Auto" Margin="5,0,0,3" Grid.Row="1" Grid.Column="1"/>
+                    <TextBlock x:Name="auto_textBlock" Text="Automatic edit" Height="Auto" Margin="5,0,0,3" Grid.Row="1" Grid.Column="3"/>
+                    <TextBlock x:Name="manual_textBlock" Text="Manual edit"  Height="Auto" Margin="5,0,0,3" Grid.Row="1" Grid.Column="5"/>
+                    <!--#endregion-->
+                    
+                    <!--#region Tips block-->
+                    <Label x:Name="uploadInfo_label" Content="Upload text file in order to check and correct it" Margin="5,0,0,24" 
+                       Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5"  Visibility="Hidden" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="upload_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="upload_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
 
-                <TextBlock x:Name="upload_textBlock" Text="Upload File" HorizontalAlignment="Left" Height="Auto" Margin="5,0,0,3" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmalaya UI" Foreground="White" FontSize="14" TextWrapping="Wrap" Grid.Row="1" Grid.Column="1"/>
-                <TextBlock x:Name="auto_textBlock" Text="Automatic edit" HorizontalAlignment="Left" Height="Auto" Margin="5,0,0,3" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmalaya UI" Foreground="White" FontSize="14" TextWrapping="Wrap" Grid.Row="1" Grid.Column="3"/>
-                <TextBlock x:Name="manual_textBlock" Text="Manual edit" HorizontalAlignment="Left" Height="Auto" Margin="5,0,0,3" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmalaya UI" Foreground="White" FontSize="14" TextWrapping="Wrap" Grid.Row="1" Grid.Column="5"/>
+                    </Label>
 
-                <!--Tips block-->
+                    <Label x:Name="autoInfo_label" Content="Correct mistakes automatically" Margin="5,0,0,27" 
+                       Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="4" Visibility="Hidden" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="auto_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="auto_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Label>
 
-                <Label x:Name="uploadInfo_label" Content="Upload text file in order to check and correct it" Height="35" Width="Auto" Margin="5,0,0,24" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                       Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="5" FontSize="14" Background="#FF232323" Foreground="White" BorderBrush="#FF747474" BorderThickness="1" Visibility="Hidden" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="upload_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="upload_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
+                    <Label x:Name="manualInfo_label" Content="Correct mistakes by yourself" Margin="5,0,0,27" 
+                       Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" Visibility="Hidden" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeave" SourceName="manual_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility">
+                                    <ei:ChangePropertyAction.Value>
+                                        <Visibility>Hidden</Visibility>
+                                    </ei:ChangePropertyAction.Value>
+                                </ei:ChangePropertyAction>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="MouseEnter" SourceName="manual_textBlock">
+                                <ei:ChangePropertyAction PropertyName="Visibility"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Label>
+                    <!--#endregion-->
+                <!--#endregion -->
+                    
+                </Grid>
+            </Viewbox>
 
-                </Label>
-
-                <Label x:Name="autoInfo_label" Content="Correct mistakes automatically" Height="35" Width="Auto" Margin="5,0,0,27" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                       Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="4" FontSize="14" Background="#FF232323" Foreground="White" BorderBrush="#FF747474" BorderThickness="1"  Visibility="Hidden" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="auto_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="auto_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Label>
-
-                <Label x:Name="manualInfo_label" Content="Correct mistakes by yourself"  Height="35" Width="Auto" Margin="5,0,0,27" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-                       Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="3" FontSize="14" Background="#FF232323" Foreground="White" BorderBrush="#FF747474" BorderThickness="1" Visibility="Hidden" >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="MouseLeave" SourceName="manual_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility">
-                                <ei:ChangePropertyAction.Value>
-                                    <Visibility>Hidden</Visibility>
-                                </ei:ChangePropertyAction.Value>
-                            </ei:ChangePropertyAction>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="MouseEnter" SourceName="manual_textBlock">
-                            <ei:ChangePropertyAction PropertyName="Visibility"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </Label>
-
-            </Grid>
-        </Viewbox>
-
-        <TextBlock x:Name="fileUploaded_textBlock" HorizontalAlignment="Left" Height="Auto" Margin="140,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmala UI" FontSize="18" FontWeight="Bold" Foreground="White"><Run FontWeight="Normal" Text="None"/></TextBlock>
-        <TextBlock x:Name="document_TextBlock" HorizontalAlignment="Left" Height="33.621" Margin="10,0,0,5" TextWrapping="Wrap" Text="Document:" VerticalAlignment="Bottom" Width="Auto" FontFamily="Nirmala UI" FontSize="24" FontWeight="Bold" Foreground="White" Grid.ColumnSpan="2" Grid.Row="2"/>
-
-    </Grid>
+        </Grid>
 </Window>

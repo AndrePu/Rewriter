@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace Rewriter.Configuration
 {
-    enum Language
+    enum AppLanguage
     {
         English,
         Russian,
         Ukrainian
-    }
-    internal static class AppLanguage   // sets the language of app
-    {
-        public static Language language = Language.English;      // English by default
     }
 }

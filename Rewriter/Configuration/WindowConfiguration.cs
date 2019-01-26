@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Rewriter.Configuration
 {
-
     enum WindowState
     {
         Normal,
@@ -14,12 +13,21 @@ namespace Rewriter.Configuration
         Maximized
     }
 
-    internal static class WindowConfiguration
+    internal class WindowConfiguration
     {
-        public static WindowState windowState = WindowState.Normal;
-        public static double Width = 640;
-        public static double Height = 480;
-        public static double Left = 0;
-        public static double Top = 0;
+        public WindowState windowState { get; set; }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public double Left { get; set; }
+        public double Top { get; set; }
+
+        public WindowConfiguration()
+        {
+            windowState = WindowState.Normal;
+            Width = 640;
+            Height = 480;
+            Left = 0;
+            Top = 0;
+        }
     }
 }

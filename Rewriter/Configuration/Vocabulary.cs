@@ -4,15 +4,15 @@ using Rewriter.Entity;
 
 namespace Rewriter.Configuration
 {
-    internal static class Vocabulary
+    internal class Vocabulary
     {
-        public static WordContext db { get; set; }
-        public static List<string> words = new List<string>();
+        public WordContext db { get; set; }
+        public List<string> words = new List<string>();
 
         #region Methods
 
         #region Searching word in vocabulary function
-        private static int BinarySearch(string word_to_find)
+        private int BinarySearch(string word_to_find)
         {
             int left = 0;
             int right = words.Count;
@@ -33,21 +33,21 @@ namespace Rewriter.Configuration
             return -1;
         }
 
-        public static bool Contains(string word)
+        public bool Contains(string word)
         {
             return (BinarySearch(word.ToLower()) != -1);
         }
         #endregion
 
         #region Words sorting
-        private static void Swap(int ind1, int ind2)
+        private void Swap(int ind1, int ind2)
         {
             string temp = words[ind1];
             words[ind1] = words[ind2];
             words[ind2] = temp;
         }
 
-        private static int Partition(int left, int right)
+        private int Partition(int left, int right)
         {
             string pivot = words[right];
 
@@ -75,7 +75,7 @@ namespace Rewriter.Configuration
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        public static void QuickSort(int left, int right)
+        public void QuickSort(int left, int right)
         {
             if (left < right)
             {
@@ -88,7 +88,7 @@ namespace Rewriter.Configuration
         #endregion
 
         #region Correction word methods
-        public static string CorrectWord(string word)
+        public string CorrectWord(string word)
         {   // WRITE ALGORITHM OF CORRECTION WORDS
             string corrected_word = "Corrected";
 
@@ -99,3 +99,4 @@ namespace Rewriter.Configuration
         #endregion
     }
 }
+

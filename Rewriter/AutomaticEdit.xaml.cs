@@ -43,15 +43,15 @@ namespace Rewriter
 
         private void SetLanguage()
         {
-            switch (AppLanguage.language)
+            switch (ProgramOptions.language)
             {
-                case Rewriter.Configuration.Language.English:
+                case AppLanguage.English:
                     SetEnglish();
                     break;
-                case Rewriter.Configuration.Language.Russian:
+                case AppLanguage.Russian:
                     SetRussian();
                     break;
-                case Rewriter.Configuration.Language.Ukrainian:
+                case AppLanguage.Ukrainian:
                     SetUkrainian();
                     break;
                 default:
@@ -135,9 +135,9 @@ namespace Rewriter
             {
                 for (int j = 0; j < ProgramOptions.document.words[i].Count; j++)
                 {
-                    if (Vocabulary.Contains(ProgramOptions.document.words[i][j]) == false)
+                    if (ProgramOptions.vocabulary.Contains(ProgramOptions.document.words[i][j]) == false)
                     {
-                        string correct_word = Vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
+                        string correct_word = ProgramOptions.vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
                         ProgramOptions.document.Text = ProgramOptions.document.Text.Replace(ProgramOptions.document.words[i][j], correct_word);
                         ProgramOptions.document.WordsCorrectedAmount++;
                     }

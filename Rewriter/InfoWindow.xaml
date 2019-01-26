@@ -8,11 +8,24 @@
     xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
     xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" 
     x:Name="window" x:Class="Rewriter.InfoWindow"
-        mc:Ignorable="d"
-        Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
-    <Grid x:Name="HeadGrid">
+    mc:Ignorable="d"
+    Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC"
+    KeyDown="Window_KeyDown" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
 
-        <Image Source="Resources/Back.png" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0" MouseDown="Image_MouseDown" Cursor="Hand">
+    <Grid x:Name="HeadGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition  Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="Resources/Back.png" Cursor ="Hand" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" >
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
@@ -29,14 +42,13 @@
 
             </i:Interaction.Triggers>
 
-
         </Image>
 
-        <Viewbox>
-        <Grid x:Name="MainGrid" Width="634" Height="450.4">
+    <Viewbox Grid.RowSpan="3" Grid.ColumnSpan="3">
+        <Grid Width="634" Height="450.8">
 
 
-    </Grid>
+        </Grid>
     </Viewbox>
         </Grid>
 </Window>

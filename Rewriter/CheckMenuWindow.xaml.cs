@@ -21,6 +21,9 @@ namespace Rewriter
     /// </summary>
     public partial class CheckMenuWindow : Window
     {
+        private string warningTitle = String.Empty;
+        private string warningMessage = String.Empty;
+
         OpenFileDialog openFileDialog1 = new OpenFileDialog();
         public CheckMenuWindow()
         {
@@ -37,13 +40,13 @@ namespace Rewriter
         #region Window size setting
         private void SetWindowConfiguration()
         {
-            this.Width = WindowConfiguration.Width;
-            this.Height = WindowConfiguration.Height;
+            this.Width = ProgramOptions.windowConfiguration.Width;
+            this.Height = ProgramOptions.windowConfiguration.Height;
 
-            this.Left = WindowConfiguration.Left;
-            this.Top = WindowConfiguration.Top;
+            this.Left = ProgramOptions.windowConfiguration.Left;
+            this.Top = ProgramOptions.windowConfiguration.Top;
 
-            if (WindowConfiguration.windowState == Rewriter.Configuration.WindowState.Maximized)
+            if (ProgramOptions.windowConfiguration.windowState == Rewriter.Configuration.WindowState.Maximized)
                 this.WindowState = System.Windows.WindowState.Maximized;
         }
 
@@ -53,15 +56,15 @@ namespace Rewriter
 
         private void SetLanguage()
         {
-            switch (AppLanguage.language)
+            switch (ProgramOptions.language)
             {
-                case Rewriter.Configuration.Language.English:
+                case AppLanguage.English:
                     SetEnglish();
                     break;
-                case Rewriter.Configuration.Language.Russian:
+                case AppLanguage.Russian:
                     SetRussian();
                     break;
-                case Rewriter.Configuration.Language.Ukrainian:
+                case AppLanguage.Ukrainian:
                     SetUkrainian();
                     break;
                 default:
@@ -92,6 +95,9 @@ namespace Rewriter
 
             document_TextBlock.Text = "Document:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+            warningTitle = "Warning";
+            warningMessage = "No file to check was opened!";
         }
 
         private void SetRussian()
@@ -115,6 +121,9 @@ namespace Rewriter
 
             document_TextBlock.Text = "Документ:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+            warningTitle = "Предупреждение";
+            warningMessage = "Файл для проверки еще не был загружен!";
         }
 
         private void SetUkrainian()
@@ -138,6 +147,9 @@ namespace Rewriter
 
             document_TextBlock.Text = "Документ:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+            warningTitle = "Попередження";
+            warningMessage = "Файл для перевірки ще не був завантажений!";
         }
 
         #endregion
@@ -169,31 +181,29 @@ namespace Rewriter
         {
             if (this.WindowState == System.Windows.WindowState.Maximized)
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Maximized;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Maximized;
             }
             else if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Normal;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Normal;
             }
             else
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Minimized;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Minimized;
             }
 
-            WindowConfiguration.Width = this.Width;
-            WindowConfiguration.Height = this.Height;
+            ProgramOptions.windowConfiguration.Width = this.Width;
+            ProgramOptions.windowConfiguration.Height = this.Height;
 
-            WindowConfiguration.Left = this.Left;
-            WindowConfiguration.Top = this.Top;
+            ProgramOptions.windowConfiguration.Left = this.Left;
+            ProgramOptions.windowConfiguration.Top = this.Top;
         }
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            WindowConfiguration.Left = this.Left;
-            WindowConfiguration.Top = this.Top;
+            ProgramOptions.windowConfiguration.Left = this.Left;
+            ProgramOptions.windowConfiguration.Top = this.Top;
         }
-        #endregion
-        
 
 
         private void auto_rectME_MouseDown(object sender, MouseButtonEventArgs e)
@@ -204,7 +214,7 @@ namespace Rewriter
                 auto_edit.Show();
             }
             else
-                System.Windows.MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(warningMessage, warningTitle, MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         private void manual_rectME_MouseDown(object sender, MouseButtonEventArgs e)
@@ -217,7 +227,7 @@ namespace Rewriter
             }
             else
             {
-                System.Windows.MessageBox.Show("No file to check was opened!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                System.Windows.MessageBox.Show(warningMessage, warningTitle, MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -241,5 +251,6 @@ namespace Rewriter
 
             ProgramOptions.document.GetInfo();                     // Makes information about document
         }
+        #endregion
     }
 }

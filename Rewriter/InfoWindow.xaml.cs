@@ -30,13 +30,13 @@ namespace Rewriter
         #region Window size setting
         private void SetWindowConfiguration()
         {
-            this.Width = WindowConfiguration.Width;
-            this.Height = WindowConfiguration.Height;
+            this.Width = ProgramOptions.windowConfiguration.Width;
+            this.Height = ProgramOptions.windowConfiguration.Height;
 
-            this.Left = WindowConfiguration.Left;
-            this.Top = WindowConfiguration.Top;
+            this.Left = ProgramOptions.windowConfiguration.Left;
+            this.Top = ProgramOptions.windowConfiguration.Top;
 
-            if (WindowConfiguration.windowState == Rewriter.Configuration.WindowState.Maximized)
+            if (ProgramOptions.windowConfiguration.windowState == Rewriter.Configuration.WindowState.Maximized)
                 this.WindowState = System.Windows.WindowState.Maximized;
         }
 
@@ -46,15 +46,15 @@ namespace Rewriter
 
         private void SetLanguage()
         {
-            switch (AppLanguage.language)
+            switch (ProgramOptions.language)
             {
-                case Rewriter.Configuration.Language.English:
+                case AppLanguage.English:
                     SetEnglish();
                     break;
-                case Rewriter.Configuration.Language.Russian:
+                case AppLanguage.Russian:
                     SetRussian();
                     break;
-                case Rewriter.Configuration.Language.Ukrainian:
+                case AppLanguage.Ukrainian:
                     SetUkrainian();
                     break;
                 default:
@@ -106,28 +106,28 @@ namespace Rewriter
         {
             if (this.WindowState == System.Windows.WindowState.Maximized)
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Maximized;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Maximized;
             }
             else if (this.WindowState == System.Windows.WindowState.Normal)
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Normal;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Normal;
             }
             else
             {
-                WindowConfiguration.windowState = Rewriter.Configuration.WindowState.Minimized;
+                ProgramOptions.windowConfiguration.windowState = Rewriter.Configuration.WindowState.Minimized;
             }
 
-            WindowConfiguration.Width = this.Width;
-            WindowConfiguration.Height = this.Height;
+            ProgramOptions.windowConfiguration.Width = this.Width;
+            ProgramOptions.windowConfiguration.Height = this.Height;
 
-            WindowConfiguration.Left = this.Left;
-            WindowConfiguration.Top = this.Top;
+            ProgramOptions.windowConfiguration.Left = this.Left;
+            ProgramOptions.windowConfiguration.Top = this.Top;
         }
 
         private void Window_LocationChanged(object sender, EventArgs e)
         {
-            WindowConfiguration.Left = this.Left;
-            WindowConfiguration.Top = this.Top;
+            ProgramOptions.windowConfiguration.Left = this.Left;
+            ProgramOptions.windowConfiguration.Top = this.Top;
         }
         #endregion
     }

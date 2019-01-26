@@ -77,10 +77,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CloseWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,9 +94,6 @@
     </Compile>
     <Compile Include="CheckMenuWindow.xaml.cs">
       <DependentUpon>CheckMenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CloseWindow.xaml.cs">
-      <DependentUpon>CloseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Configuration\Document.cs" />
     <Compile Include="Configuration\Vocabulary.cs" />
@@ -128,6 +121,7 @@
     <Compile Include="ManualEdit.xaml.cs">
       <DependentUpon>ManualEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProgramOptions.cs" />
     <Compile Include="OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>

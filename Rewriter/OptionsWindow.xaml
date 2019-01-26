@@ -9,6 +9,8 @@
        Title="Rewriter" Height="480" Width="640" KeyDown="Window_KeyDown" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
+        
+        <!--#region Button Template-->
         <!--Making colors template for button events-->
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FF9600BC"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FFFFFF"/>
@@ -58,6 +60,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <!--#endregion-->
+        
     </Window.Resources>
     
     <Grid x:Name="HeadGrid">

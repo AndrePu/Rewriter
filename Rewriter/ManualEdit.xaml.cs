@@ -27,7 +27,7 @@ namespace Rewriter
             SetWindowConfiguration();
 
            // text_textBox.Text = Document.Text;
-            sentence.Text = Document.Sentences[0] + '.';
+            sentence.Text = ProgramOptions.document.Sentences[0] + '.';
 
 
             foreach (string w in Vocabulary.words)

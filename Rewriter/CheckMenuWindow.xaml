@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Rewriter"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" x:Name="window" x:Class="Rewriter.CheckMenuWindow"
         mc:Ignorable="d"
-        Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
+        Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize"
+    KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
+    
     <Window.Background>
         <ImageBrush ImageSource="Resources/Background2.png"/>
     </Window.Background>

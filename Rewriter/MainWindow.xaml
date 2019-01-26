@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rewriter"
         mc:Ignorable="d"
-        Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner" KeyDown="Window_KeyDown" Icon="Resources/logo_icon.ico" Background="#FF9600BC" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
+        Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner"
+        Icon="Resources/logo_icon.ico" Background="#FF9600BC"
+        KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
 
-    
+
     <Window.Resources>
+
         <!--Making colors template for button events-->
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FF9600BC"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FFFFFF"/>
@@ -23,6 +26,8 @@
 
         <!--Creating a style for button template-->
         <Style TargetType="{x:Type Button}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Width" Value="200"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="FontFamily" Value="Nirmala UI"/>
@@ -58,20 +63,41 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--Creating style for image-->
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
     </Window.Resources>
 
     <Viewbox>
-    <Grid Width="634" Height="450.8">
+    <Grid Width="634" Height="450.8">  <!--Set size in order to fix grid in viewbox-->
+
+        <Grid.RowDefinitions>
+                <RowDefinition Height="165"/>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width ="217*"/>
-            <ColumnDefinition Width ="200*"/>
-            <ColumnDefinition Width="217*" />
-        </Grid.ColumnDefinitions> 
-        <Image Source="Resources/Logo2.png" HorizontalAlignment="Center" VerticalAlignment="Top" Height="204" Width="340" Grid.ColumnSpan="3" Margin="147,0,147,0" />
-        <Button x:Name="checkText_button" Content="Start Check Text" Margin="0,165,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="checkText_button_Click" Grid.Column="1"/>
-        <Button x:Name ="options_button" Content="Options" Margin="0,215,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="options_button_Click" Grid.Column="1"/>
-        <Button x:Name = "info_button" Content="How to use" Margin="0,265,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="info_button_Click" Grid.Column="1"/>
-        <Button x:Name ="exit_button" Content="Exit" Margin="0,315,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="exit_button_Click" Grid.Column="1"/>
-        </Grid>
+            <ColumnDefinition Width ="217"/>
+            <ColumnDefinition Width ="200"/>
+            <ColumnDefinition Width="217" />
+        </Grid.ColumnDefinitions>
+
+        <Image Source="Resources/Logo2.png" Height="200" Width="340" Grid.ColumnSpan="3"/>
+
+        <Button x:Name ="checkText_button" Content="Start Check Text" Grid.Row="1" Grid.Column="1" Click="checkText_button_Click"/>
+        <Button x:Name ="options_button" Content="Options" Grid.Row="3" Grid.Column="1" Click="options_button_Click"/>
+        <Button x:Name ="info_button" Content="How to use" Grid.Row="5" Grid.Column="1" Click="info_button_Click"/>
+        <Button x:Name ="exit_button" Content="Exit" Grid.Row="7" Grid.Column="1" Click="exit_button_Click"/>
+        
+    </Grid>
     </Viewbox>
 </Window>

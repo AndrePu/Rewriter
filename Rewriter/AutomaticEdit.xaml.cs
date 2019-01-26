@@ -22,14 +22,22 @@ namespace Rewriter
     /// </summary>
     public partial class AutomaticEdit : Window
     {
-        object locked = new object();
-        public AutomaticEdit()
+        private SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+        public Document document { get; set; }      // Property that indicates info of document
+        
+        public AutomaticEdit(Document document)
         {
             InitializeComponent();
-            SetLanguage();
-            SetTextInfo();
-        }
 
+            this.document = document;
+            this.document.WordsCheckedAmount = 0;
+            this.document.WordsCorrectedAmount = 0;
+
+            saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            saveFileDialog1.DefaultExt = ".txt";
+
+            SetLanguage();
+        }
 
         #region Setting language for this Window
 
@@ -64,6 +72,8 @@ namespace Rewriter
 
             timePinned_textBlock.Text = "Time left: ";
             time_textBlock.Text = "1h 2m 32s";
+
+            saveFileDialog1.Title = "Save processed file..";
         }
 
         private void SetRussian()
@@ -77,6 +87,8 @@ namespace Rewriter
 
             timePinned_textBlock.Text = "Времени осталось: ";
             time_textBlock.Text = "3ч 23м 1с";
+
+            saveFileDialog1.Title = "Сохранить обработанный файл..";
         }
 
         private void SetUkrainian()
@@ -90,48 +102,28 @@ namespace Rewriter
 
             timePinned_textBlock.Text = "Залишилося часу: ";
             time_textBlock.Text = "3г 23хв 42с";
+
+            saveFileDialog1.Title = "Зберегти оброблений файл..";
         }
 
         #endregion
 
-        /// <summary>
-        /// Setting document info to the labels
-        /// </summary>
-        private void SetTextInfo()
+        #region Checking text process
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lock (locked)
-            {
-                symbAmount_textBlock.Text = Document.symbolsAmount.ToString();
-                wordsAmount_textBlock.Text = Document.wordsAmount.ToString();
-                senAmount_textBlock.Text = Document.sentencesAmount.ToString();
-                wordsChecked_textBlock.Text = Document.wordsCheckedAmount.ToString();
-                wordsCorrected_textBlock.Text = Document.wordsCorrectedAmount.ToString();
-
-                progressBar.Value = Document.wordsCheckedAmount * 100 / Document.wordsAmount;
-            }
+            CheckText();
         }
-        private void ProcessForm()
-        {
-            Thread checkText = new Thread(CheckText);
-
-            checkText.Start();
-        }
+        
         private async void CheckText()
         {
-            Thread.Sleep(0);
             await Task.Run(() => AutoCorrectMistakes());
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Title = "Save processed file..";
-            saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-            saveFileDialog1.DefaultExt = ".txt";
-
+            /*Saving file..*/
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // получаем выбранный файл
                 string filename = saveFileDialog1.FileName;
-                // сохраняем текст в файл
-                System.IO.File.WriteAllText(filename, Document.Text);
+                
+                System.IO.File.WriteAllText(filename, ProgramOptions.document.Text);
             }
 
             this.Close();
@@ -139,26 +131,22 @@ namespace Rewriter
 
         private void AutoCorrectMistakes()
         {
-            for (int i = 0; i < Document.sentencesAmount; i++)
+            for (int i = 0; i < ProgramOptions.document.SentencesAmount; i++)
             {
-                for (int j = 0; j < Document.words[i].Count; j++)
+                for (int j = 0; j < ProgramOptions.document.words[i].Count; j++)
                 {
-                    if (Vocabulary.Contains(Document.words[i][j]) == false)
+                    if (Vocabulary.Contains(ProgramOptions.document.words[i][j]) == false)
                     {
-                        string correct_word = Vocabulary.CorrectWord(Document.words[i][j]);
-                        Document.Text = Document.Text.Replace(Document.words[i][j], correct_word);
-                        Document.wordsCorrectedAmount++;
+                        string correct_word = Vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
+                        ProgramOptions.document.Text = ProgramOptions.document.Text.Replace(ProgramOptions.document.words[i][j], correct_word);
+                        ProgramOptions.document.WordsCorrectedAmount++;
                     }
-                    Document.wordsCheckedAmount++;
+
+                    ProgramOptions.document.WordsCheckedAmount++;
+                    Thread.Sleep(1000);                                         // TESTING LINE | DELETE!!!!!!              
                 }
-                SetTextInfo();
-                //Thread.Sleep(300);
             }
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            CheckText();
-        }
+        #endregion
     }
 }

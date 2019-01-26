@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Rewriter.Configuration
 {
-    internal static class Document
+    public class Document : INotifyPropertyChanged  // class will be connected to properties of control elements
     {
-        private static string filename = null;      // shows current path and name of document
-        private static string text = null;
+        private string filename = null;             // shows current path and name of document
+        private string text = null;
+        private int wordsAmount;
+        private int symbolsAmount = 0;
+        private int sentencesAmount;
+        private int wordsCheckedAmount;
+        private int wordsCorrectedAmount = 10;
+        private int textChecked;                    // percents of how much of text were checked
 
-        public static List<List<string>> words = new List<List<string>>();          // list of words in sentences that needs in editing
+        public List<List<string>> words = new List<List<string>>();          // all the words in document
 
 
         #region Autopropeties of class
-        public static string Filename
+        public string Filename
         {
             get
             {
@@ -27,10 +35,11 @@ namespace Rewriter.Configuration
             set
             {
                 filename = value;
+                OnPropertyChanged("Filename");
             }
         }       
 
-        public static string Text                  // content of document
+        public string Text                  // content of document
         {
             get
             {
@@ -39,23 +48,97 @@ namespace Rewriter.Configuration
             set
             {
                 text = value;
+                OnPropertyChanged("Text");
             }
         }         
 
-        public static string[] Sentences { get; set; }
         
-        public static int wordsAmount { get; set; } = 0;
+        public int WordsAmount
+        {
+            get
+            {
+                return wordsAmount;
+            }
+            set
+            {
+                wordsAmount = value;
+                OnPropertyChanged("WordsAmount");
+            }
+        }
+        
 
-        public static int symbolsAmount { get; set; } = 0;
+        public int SymbolsAmount
+        {
+            get
+            {
+                return symbolsAmount;
+            }
+            set
+            {
+                symbolsAmount = value;
+                OnPropertyChanged("SymbolsAmount");
+            }
+        }
 
-        public static int sentencesAmount { get; set; } = 0;
-        public static int wordsCheckedAmount { get; set; } = 0;
+        public int SentencesAmount
+        {
+            get
+            {
+                return sentencesAmount;
+            }
+            set
+            {
+                sentencesAmount = value;
+                OnPropertyChanged("SentencesAmount");
+            }
+        }
 
-        public static int wordsCorrectedAmount { get; set; } = 0;
+        public int WordsCheckedAmount
+        {
+            get
+            {
+                return wordsCheckedAmount;
+            }
+            set
+            {
+                wordsCheckedAmount = value;
+                OnPropertyChanged("WordsCheckedAmount");
+
+                TextChecked = wordsCheckedAmount * 100 / WordsAmount;   // making dependent textChecked variable from current one
+            }
+        }
+
+        public int WordsCorrectedAmount
+        {
+            get
+            {
+                return wordsCorrectedAmount;
+            }
+            set
+            {
+                wordsCorrectedAmount = value;
+                OnPropertyChanged("WordsCorrectedAmount");
+            }
+        }
+
+        public int TextChecked
+        {
+            get
+            {
+                return textChecked;
+            }
+            set
+            {
+                textChecked = value;
+                OnPropertyChanged("TextChecked");
+            }
+        }
+
+        public string[] Sentences { get; set; }
 
         #region Variables for manual correcting
-        public static int current_word { get; set; } = 0; // index of currently analysing word among uncorrect ones in sentence
-        public static int current_sentence { get; set; } = 0;   // index currently analysing sentence in text
+        public int Current_word { get; set; } = 0; // index of currently analysing word among uncorrect ones in sentence
+        public int Current_sentence { get; set; } = 0;   // index currently analysing sentence in text
         #endregion
 
         #endregion
@@ -63,7 +146,7 @@ namespace Rewriter.Configuration
 
         #region Methods
         
-        public static void FormWordsToCheck()
+        public void FormWordsToCheck()
         {
             for (int i = 0; i < Sentences.Length; i++)
             {
@@ -79,7 +162,7 @@ namespace Rewriter.Configuration
             }
         }
 
-        public static void MakeInfo()
+        public void GetInfo()
         {
             sentencesAmount = Sentences.Length;
 
@@ -95,9 +178,17 @@ namespace Rewriter.Configuration
         /// Tells whether document to check and edit is loaded in program
         /// </summary>
         /// <returns></returns>
-        public static bool IsOpened()
+        public bool IsOpened()
         {
             return filename != null;
+        }
+
+        // Updating properties of control elements after binding properties were changed
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         #endregion

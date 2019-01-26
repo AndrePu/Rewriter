@@ -91,7 +91,7 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 27);
 
             document_TextBlock.Text = "Document:";
-            fileUploaded_textBlock.Text = Document.Filename;
+            fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
         }
 
         private void SetRussian()
@@ -114,7 +114,7 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
 
             document_TextBlock.Text = "Документ:";
-            fileUploaded_textBlock.Text = Document.Filename;
+            fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
         }
 
         private void SetUkrainian()
@@ -137,7 +137,7 @@ namespace Rewriter
             manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
 
             document_TextBlock.Text = "Документ:";
-            fileUploaded_textBlock.Text = Document.Filename;
+            fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
         }
 
         #endregion
@@ -198,9 +198,9 @@ namespace Rewriter
 
         private void auto_rectME_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Document.IsOpened())
+            if (ProgramOptions.document.IsOpened())
             {
-                AutomaticEdit auto_edit = new AutomaticEdit();
+                AutomaticEdit auto_edit = new AutomaticEdit(ProgramOptions.document);
                 auto_edit.Show();
             }
             else
@@ -209,7 +209,7 @@ namespace Rewriter
 
         private void manual_rectME_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Document.IsOpened())
+            if (ProgramOptions.document.IsOpened())
             {
                 ManualEdit manual_edit = new ManualEdit();
                 manual_edit.Show();
@@ -227,19 +227,19 @@ namespace Rewriter
                 return;
 
             // Get chosen file
-            Document.Filename = openFileDialog1.FileName;
-            fileUploaded_textBlock.Text = Document.Filename;
+            ProgramOptions.document.Filename = openFileDialog1.FileName;
+            fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
 
             // Read content of file to string
-            Document.Text = System.IO.File.ReadAllText(Document.Filename, Encoding.GetEncoding(1251));
+            ProgramOptions.document.Text = System.IO.File.ReadAllText(ProgramOptions.document.Filename, Encoding.GetEncoding(1251));
 
 
-            string clear_text = Document.Text.Replace("\n", "").Replace("\r", ""); // text without \n and \r symbols
-            Document.Sentences = clear_text.Remove(clear_text.Length - 1).Split('!', '?', '.');
+            string clear_text = ProgramOptions.document.Text.Replace("\n", "").Replace("\r", ""); // text without \n and \r symbols
+            ProgramOptions.document.Sentences = clear_text.Remove(clear_text.Length - 1).Split('!', '?', '.');
 
-            Document.FormWordsToCheck();           // Choose words from sentences that needed to be edited
+            ProgramOptions.document.FormWordsToCheck();           // Choose words from sentences that needed to be edited
 
-            Document.MakeInfo();                     // Makes information about document
+            ProgramOptions.document.GetInfo();                     // Makes information about document
         }
     }
 }

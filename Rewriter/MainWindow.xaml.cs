@@ -28,6 +28,7 @@ namespace Rewriter
             
             if (first_run) // Loading main vocabulary to program
             {
+                first_run = false;
                 LoadMainVocabulary();
             }
         }
@@ -35,7 +36,7 @@ namespace Rewriter
         #region Loading main vocabulary
         private async void LoadMainVocabulary()
         {
-            await Task.Run(() =>
+            await Task.Run(() =>            // defining asynchronic operation using lambda expression
             {
                 Vocabulary.db = new WordContext();
 

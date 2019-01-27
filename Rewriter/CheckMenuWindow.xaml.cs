@@ -237,6 +237,7 @@ namespace Rewriter
                 return;
 
             // Get chosen file
+            ProgramOptions.document = new Document();
             ProgramOptions.document.Filename = openFileDialog1.FileName;
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
 

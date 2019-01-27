@@ -12,6 +12,7 @@ namespace Rewriter.Configuration
     {
         private string filename = null;             // shows current path and name of document
         private string text = null;
+        private string edited_text = null;
         private int wordsAmount;
         private int symbolsAmount = 0;
         private int sentencesAmount;
@@ -20,7 +21,7 @@ namespace Rewriter.Configuration
         private int textChecked;                    // percents of how much of text were checked
 
         public List<List<string>> words = new List<List<string>>();          // all the words in document
-
+        
 
         #region Autopropeties of class
         public string Filename
@@ -46,13 +47,24 @@ namespace Rewriter.Configuration
                 return text;
             }
             set
-            {
+            { 
                 text = value;
+                EditedText = text;
                 OnPropertyChanged("Text");
             }
         }         
 
-        
+        public string EditedText
+        {
+            get
+            {
+                return edited_text;
+            }
+            set
+            {
+                edited_text = text;
+            }
+        }
         public int WordsAmount
         {
             get
@@ -65,7 +77,6 @@ namespace Rewriter.Configuration
                 OnPropertyChanged("WordsAmount");
             }
         }
-        
 
         public int SymbolsAmount
         {
@@ -133,6 +144,7 @@ namespace Rewriter.Configuration
                 OnPropertyChanged("TextChecked");
             }
         }
+        public bool Checked { get; set; } = false;
 
         public string[] Sentences { get; set; }
 

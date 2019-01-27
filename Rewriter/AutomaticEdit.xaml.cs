@@ -116,14 +116,15 @@ namespace Rewriter
         
         private async void CheckText()
         {
-            await Task.Run(() => AutoCorrectMistakes());
+            if (document.Checked == false)  // check text if only we haven't done it yet
+                await Task.Run(() => AutoCorrectMistakes());
 
             /*Saving file..*/
             if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 string filename = saveFileDialog1.FileName;
                 
-                System.IO.File.WriteAllText(filename, ProgramOptions.document.Text);
+                System.IO.File.WriteAllText(filename, ProgramOptions.document.EditedText);
             }
 
             this.Close();
@@ -138,14 +139,15 @@ namespace Rewriter
                     if (ProgramOptions.vocabulary.Contains(ProgramOptions.document.words[i][j]) == false)
                     {
                         string correct_word = ProgramOptions.vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
-                        ProgramOptions.document.Text = ProgramOptions.document.Text.Replace(ProgramOptions.document.words[i][j], correct_word);
+                        ProgramOptions.document.Text = ProgramOptions.document.EditedText.Replace(ProgramOptions.document.words[i][j], correct_word);
                         ProgramOptions.document.WordsCorrectedAmount++;
                     }
-
+                    
                     ProgramOptions.document.WordsCheckedAmount++;
                     Thread.Sleep(1000);                                         // TESTING LINE | DELETE!!!!!!              
                 }
             }
+            ProgramOptions.document.Checked = true;
         }
         #endregion
     }

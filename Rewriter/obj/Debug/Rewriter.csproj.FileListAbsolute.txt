@@ -58,3 +58,4 @@ X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.xml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.SqlServer.xml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.baml
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\Rewriter.csprojResolveAssemblyReference.cache

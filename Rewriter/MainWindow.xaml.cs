@@ -47,7 +47,8 @@ namespace Rewriter
                     ProgramOptions.vocabulary.words.Add(word.Word);
                 }
 
-                ProgramOptions.vocabulary.QuickSort(0, ProgramOptions.vocabulary.words.Count - 1);      // Sort all our values
+                ProgramOptions.vocabulary.TuneCheckingTools();
+                Algorithm.QuickSort(ProgramOptions.vocabulary.words, 0, ProgramOptions.vocabulary.words.Count - 1);      // Sort all our values
                 //MessageBox.Show("Database was loaded!");                    // TESTING LINE | DELETE
             });
         }

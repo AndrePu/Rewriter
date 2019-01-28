@@ -7,4 +7,4 @@ File path: \Rewriter\bin\Debug\Rewriter.exe
 
 
 I hope, your your PC has enough RAM memory 😅
-Program has still very slow
+Autochecking process is still very slow

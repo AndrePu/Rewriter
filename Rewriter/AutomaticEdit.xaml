@@ -88,8 +88,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="12" />
             <ColumnDefinition Width="27" />
-            <ColumnDefinition Width="134"/>
-            <ColumnDefinition Width="69" />
+            <ColumnDefinition Width="154"/>
+            <ColumnDefinition Width="49" />
             <ColumnDefinition Width="14*"/>
         </Grid.ColumnDefinitions>
 

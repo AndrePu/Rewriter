@@ -167,6 +167,7 @@ namespace Rewriter.Configuration
 
                 for (int j = 0; j < cur_sentence.Length; j++)
                 {
+                    if (cur_sentence[j] != String.Empty)
                         words_inCurSen.Add(cur_sentence[j]);
                 }
 

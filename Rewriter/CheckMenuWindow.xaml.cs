@@ -30,8 +30,7 @@ namespace Rewriter
             InitializeComponent();
             SetLanguage();
             SetWindowConfiguration();
-
-            openFileDialog1.Title = "Open file to work with..";
+            
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             openFileDialog1.DefaultExt = ".txt";
            
@@ -90,11 +89,13 @@ namespace Rewriter
             autoInfo_label.Content = "Correct mistakes automatically";
             manualInfo_label.Content = "Control correctness of every word";
 
-            uploadInfo_label.Margin = new Thickness(5, 0, 0, 27);
+            autoInfo_label.Margin = new Thickness(5, 0, 0, 27);
             manualInfo_label.Margin = new Thickness(5, 0, 0, 27);
 
             document_TextBlock.Text = "Document:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+            openFileDialog1.Title = "Open file to work with..";
 
             warningTitle = "Warning";
             warningMessage = "No file to check was opened!";
@@ -116,11 +117,13 @@ namespace Rewriter
             autoInfo_label.Content = "Автоматически исправить ошибки в файле";
             manualInfo_label.Content = "Контроль каждого исправления";
 
-            autoInfo_label.Margin = new Thickness(5,0,0,35);
-            manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
+            autoInfo_label.Margin = new Thickness(5,0,0,38);
+            manualInfo_label.Margin = new Thickness(5, 0, 0, 38);
 
             document_TextBlock.Text = "Документ:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+            openFileDialog1.Title = "Открыть файл для исправления..";
 
             warningTitle = "Предупреждение";
             warningMessage = "Файл для проверки еще не был загружен!";
@@ -142,11 +145,14 @@ namespace Rewriter
             autoInfo_label.Content = "Корегувати помилки у тексті автоматично";
             manualInfo_label.Content = "Контроль кожного виправлення";
 
-            autoInfo_label.Margin = new Thickness(5, 0, 0, 35);
-            manualInfo_label.Margin = new Thickness(5, 0, 0, 35);
+            autoInfo_label.Margin = new Thickness(5, 0, 0, 38);
+            manualInfo_label.Margin = new Thickness(5, 0, 0, 38);
 
             document_TextBlock.Text = "Документ:";
             fileUploaded_textBlock.Text = ProgramOptions.document.Filename;
+
+
+            openFileDialog1.Title = "Відкрити файл для виправлення..";
 
             warningTitle = "Попередження";
             warningMessage = "Файл для перевірки ще не був завантажений!";
@@ -211,7 +217,7 @@ namespace Rewriter
             if (ProgramOptions.document.IsOpened())
             {
                 AutomaticEdit auto_edit = new AutomaticEdit(ProgramOptions.document);
-                auto_edit.Show();
+                auto_edit.ShowDialog();
             }
             else
                 System.Windows.MessageBox.Show(warningMessage, warningTitle, MessageBoxButton.OK, MessageBoxImage.Warning);

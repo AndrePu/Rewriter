@@ -14,9 +14,9 @@ namespace Rewriter
         const int alph_size = 26;
         const int def_lint = 0;
         const int transpose_cost = 1;
-        const int delete_cost = 1;
-        const int insert_cost = 1;
-        const int replace_cost = 1;
+        const int delete_cost = 2;
+        const int insert_cost = 3;
+        const int replace_cost = 2;
         #endregion
 
         public static int Max(params int[] numbers)

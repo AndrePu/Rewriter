@@ -84,6 +84,7 @@ namespace Rewriter
             wordsAmountPinned_textBlock.Text = "Количество слов:";
             wordsCheckedPinned_texBlock.Text = "Слов проверено:";
             wordsCorrectedPinned_textBlock.Text = "Слов исправлено:";
+            senAmountPinned_textBlock.Text = "Количество предложений:";
 
             timePinned_textBlock.Text = "Времени осталось: ";
             time_textBlock.Text = "3ч 23м 1с";
@@ -99,6 +100,7 @@ namespace Rewriter
             wordsAmountPinned_textBlock.Text = "Кількість слів:";
             wordsCheckedPinned_texBlock.Text = "Перевірено слів:";
             wordsCorrectedPinned_textBlock.Text = "Виправлено слів:";
+            senAmountPinned_textBlock.Text = "Кількість речень:";
 
             timePinned_textBlock.Text = "Залишилося часу: ";
             time_textBlock.Text = "3г 23хв 42с";
@@ -144,7 +146,7 @@ namespace Rewriter
                     }
                     
                     ProgramOptions.document.WordsCheckedAmount++;
-                    Thread.Sleep(1000);                                         // TESTING LINE | DELETE!!!!!!              
+                    Thread.Sleep(10);                                         // TESTING LINE | DELETE!!!!!!              
                 }
             }
             ProgramOptions.document.Checked = true;

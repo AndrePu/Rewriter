@@ -26,7 +26,7 @@ namespace Rewriter.Configuration
         private List<CorrectWord> avar = new List<CorrectWord>();          // appropriate variants for words correction (DS for word correction process)
 
         private const int cor_variants = 3;                               // amount of variants to correct the word (Needed for manual editing)
-        private const int alength = 5;                               // appropriate Levengshtein distance
+        private const int alength = 6;                               // appropriate Levengshtein distance
         private const double words_part = 0.1;                                // variable for finding amount of threads needed for searching necessary word for correction
         private static int threads_amount;
         private static int wit;                                           //words in every thread                                   
@@ -70,7 +70,7 @@ namespace Rewriter.Configuration
             }
         }
         public string CorrectWord(string word_to_correct)
-        {   
+        {
             if (!Tuned)
             {
                 throw (new Exception("Variables for checking were not tuned!"));
@@ -103,9 +103,10 @@ namespace Rewriter.Configuration
             if (avar.Count != 0)
             {
                 corrected_word = avar[0].Word;
-                if (firstUpper)
-                    corrected_word = Algorithm.Capitilize(corrected_word);
             }
+            
+            if (firstUpper)
+                corrected_word = Algorithm.Capitilize(corrected_word);
 
             return corrected_word;
         }

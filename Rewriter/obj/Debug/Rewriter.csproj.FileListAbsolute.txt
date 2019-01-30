@@ -50,14 +50,10 @@ X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\AutomaticEdit.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\ManualEdit.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\AutomaticEdit.baml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\ManualEdit.baml
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.dll
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.SqlServer.dll
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.xml
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.SqlServer.xml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.baml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.baml
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\Rewriter.csprojResolveAssemblyReference.cache
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\WaitingWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\WaitingWindow.baml
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\Rewriter.csprojResolveAssemblyReference.cache

@@ -34,15 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\Logo_icon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Images\Logo_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Expression.Effects, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -102,8 +96,6 @@
     <Compile Include="Configuration\Document.cs" />
     <Compile Include="Configuration\Vocabulary.cs" />
     <Compile Include="Configuration\WindowConfiguration.cs" />
-    <Compile Include="Entity\WordContext.cs" />
-    <Compile Include="Entity\Words.cs" />
     <Compile Include="Configuration\AppLanguage.cs" />
     <Compile Include="InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
@@ -160,52 +152,52 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Logo.png" />
+    <Resource Include="Resources\Images\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="Resources\SplashScreen.png" />
+    <SplashScreen Include="Resources\Images\SplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Logo_icon.ico" />
+    <Resource Include="Resources\Images\Logo_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Logo2.png" />
+    <Resource Include="Resources\Images\Logo2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Back.png" />
+    <Resource Include="Resources\Images\Back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\left_arrow.png" />
-    <Resource Include="Resources\right_arrow.png" />
+    <Resource Include="Resources\Images\left_arrow.png" />
+    <Resource Include="Resources\Images\right_arrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\download.png" />
+    <Resource Include="Resources\Images\download.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background2.png" />
+    <Resource Include="Resources\Images\Background2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background3.jpg" />
+    <Resource Include="Resources\Images\Background3.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Bot.png" />
-    <Resource Include="Resources\Manual.png" />
+    <Resource Include="Resources\Images\Bot.png" />
+    <Resource Include="Resources\Images\Manual.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Upload.png" />
+    <Resource Include="Resources\Images\Upload.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Robot.png" />
+    <Resource Include="Resources\Images\Robot.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Manual2.png" />
+    <Resource Include="Resources\Images\Manual2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\tap.png" />
+    <Resource Include="Resources\Images\tap.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background4.png" />
-    <Resource Include="Resources\Background5.png" />
+    <Resource Include="Resources\Images\Background4.png" />
+    <Resource Include="Resources\Images\Background5.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

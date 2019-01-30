@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/background4.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/background5.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/google-10000-english-no-swears.txt")]
 
 

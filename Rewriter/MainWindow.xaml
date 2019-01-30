@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rewriter"
         mc:Ignorable="d"
         Title="Rewriter" Height="480" Width="640" WindowStartupLocation="CenterOwner"
-        Icon="Resources/logo_icon.ico" Background="#FF9600BC"
+        Icon="Resources/Images/logo_icon.ico" Background="#FF9600BC"
         KeyDown="Window_KeyDown" SizeChanged="Window_SizeChanged" LocationChanged="Window_LocationChanged">
 
     <Window.Resources>
@@ -93,7 +93,7 @@
             <ColumnDefinition Width="217" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="Resources/Logo2.png" Height="200" Width="340" Grid.ColumnSpan="3"/>
+        <Image Source="Resources/Images/Logo2.png" Height="200" Width="340" Grid.ColumnSpan="3"/>
 
         <Button x:Name ="checkText_button" Content="Start Check Text" Grid.Row="1" Grid.Column="1" Click="checkText_button_Click"/>
         <Button x:Name ="options_button" Content="Options" Grid.Row="3" Grid.Column="1" Click="options_button_Click"/>

@@ -8,7 +8,7 @@
         xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" 
         xmlns:local="clr-namespace:Rewriter"
         mc:Ignorable="d"
-     Title="Manual edit" Height="480" Width="640" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC"
+     Title="Manual edit" Height="480" Width="640" WindowStartupLocation="CenterOwner" Icon="Resources/Images/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC"
         KeyDown="Window_KeyDown" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
@@ -146,7 +146,7 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Resources/Back.png" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" Cursor="Hand">
+        <Image Source="Resources/Images/Back.png" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" Cursor="Hand">
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">

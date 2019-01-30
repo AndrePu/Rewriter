@@ -26,6 +26,7 @@ namespace Rewriter
         public WaitingWindow(List<List<string>> corVar, int words_processed)
         {
             InitializeComponent();
+            SetLanguage();
 
             this.corVar = corVar;
             this.words_processed = words_processed;

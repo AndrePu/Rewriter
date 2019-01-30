@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rewriter"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:ee="http://schemas.microsoft.com/expression/2010/effects" x:Name="window" x:Class="Rewriter.OptionsWindow"
         mc:Ignorable="d"
-       Title="Rewriter" Height="480" Width="640" KeyDown="Window_KeyDown" WindowStartupLocation="CenterOwner" Icon="Resources/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
+       Title="Rewriter" Height="480" Width="640" KeyDown="Window_KeyDown" WindowStartupLocation="CenterOwner" Icon="Resources/Images/logo_icon.ico" ResizeMode="CanResize" Background="#FF9600BC" LocationChanged="Window_LocationChanged" SizeChanged="Window_SizeChanged">
 
     <Window.Resources>
         
@@ -89,7 +89,7 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="Resources/Back.png" Cursor ="Hand" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" >
+        <Image Source="Resources/Images/Back.png" Cursor ="Hand" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" >
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseEnter">
@@ -131,7 +131,7 @@
             
             <Label x:Name = "lang_label" Content="English" Grid.Row="1" Grid.Column="3"/>
 
-            <Image x:Name="left_arrow" Source="Resources/left_arrow.png" Cursor="Hand" Grid.Row="1" Grid.Column="1" MouseDown="left_arrow_MouseDown">
+            <Image x:Name="left_arrow" Source="Resources/Images/left_arrow.png" Cursor="Hand" Grid.Row="1" Grid.Column="1" MouseDown="left_arrow_MouseDown">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseEnter">
                         <ei:ChangePropertyAction PropertyName="Effect">
@@ -146,7 +146,7 @@
                 </i:Interaction.Triggers>
             </Image>
 
-            <Image  x:Name="right_arrow" Source="Resources/right_arrow.png" Cursor="Hand" Grid.Row="1"  Grid.Column="5" MouseDown="right_arrow_MouseDown">
+            <Image  x:Name="right_arrow" Source="Resources/Images/right_arrow.png" Cursor="Hand" Grid.Row="1"  Grid.Column="5" MouseDown="right_arrow_MouseDown">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseEnter">
                         <ei:ChangePropertyAction PropertyName="Effect">

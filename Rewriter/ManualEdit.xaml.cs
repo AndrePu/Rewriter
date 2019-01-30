@@ -26,6 +26,7 @@ namespace Rewriter
         private string warningTitle = "Warning";
         private string attentionTitle = "Attention";
 
+        private string interrupt_message = "Do you really want to interrupt editing process? Correction process won't be saved!";
         private string warning_message = "You haven't entered variant to use!";
         private string cleanDoc_message = "Your document doesn't have any lexicographical mistakes!";
         private string ownVar_message = "Please,enter your variant..";
@@ -62,7 +63,6 @@ namespace Rewriter
             saveFileDialog1.DefaultExt = ".txt";
 
             StartFormVariants();
-
 
             UpdateSentence();
             ManualCheckMenu();
@@ -112,12 +112,20 @@ namespace Rewriter
             warning_message = "You haven't entered variant to use!";
             cleanDoc_message = "Your document doesn't have any lexicographical mistakes!";
             ownVar_message = "Please,enter your variant..";
+            interrupt_message = "Do you really want to interrupt editing process? Correction process won't be saved!";
 
             blockName1_textBlock.Text = "Mistakes correcting";
             blockName2_textBlock.Text = "Variants to correct";
 
+            blockName1_textBlock.FontSize = 18;
+            blockName2_textBlock.FontSize = 18;
+
             wordPinned_textBlock.Text = "Word: ";
             sentencePinned.Text = "Sentence: ";
+
+            addWord_button.Content = "Add to vocabulary";
+            ownVar_button.Content = "Add own variant";
+            ownVar_button.FontSize = 14;
 
             Window.Title = "Manual edit";
 
@@ -132,12 +140,20 @@ namespace Rewriter
             warning_message = "Вы еще не ввели вариант для правки!";
             cleanDoc_message = "В вашем документе отсутствуют лексографические ошибки!";
             ownVar_message = "Пожалуйста, введите свой вариант..";
+            interrupt_message = "Вы действительно хотите приостановить процесс правки? Исправленная часть текста не будет сохранена!";
 
             blockName1_textBlock.Text = "Исправление ошибок";
             blockName2_textBlock.Text = "Варианты для правки";
 
+            blockName1_textBlock.FontSize = 16;
+            blockName2_textBlock.FontSize = 16;
+
             wordPinned_textBlock.Text = "Слово: ";
             sentencePinned.Text = "Предложение: ";
+
+            addWord_button.Content = "Добавить в словарь";
+            ownVar_button.Content = "Добавить свой вариант";
+            ownVar_button.FontSize = 13;
 
             Window.Title = "Проверка вручную";
 
@@ -152,12 +168,20 @@ namespace Rewriter
             warning_message = "Ви ще не ввели варіант для виправлення!";
             cleanDoc_message = "У вашому документі відсутні лексографічні помилки!";
             ownVar_message = "Будьте ласкаві, введіть слово..";
+            interrupt_message = "Ви дійсно хочете зупинити процесс виправлення? Виправлена частина тексту не буде збережена!";
 
             blockName1_textBlock.Text = "Виправлення помилок";
-            blockName2_textBlock.Text = "Варіанти для виправлення";
+            blockName2_textBlock.Text = "Варіанти виправлення";
+
+            blockName1_textBlock.FontSize = 16;
+            blockName2_textBlock.FontSize = 16;
 
             wordPinned_textBlock.Text = "Слово: ";
             sentencePinned.Text = "Речення: ";
+
+            addWord_button.Content = "Додати в словник";
+            ownVar_button.Content = "Додати свій варіант";
+            ownVar_button.FontSize = 13;
 
             Window.Title = "Самостійне виправлення";
 
@@ -199,23 +223,27 @@ namespace Rewriter
         {
             if (e.Key == Key.Escape)
             {
-                ReturnToMainMenu();
+                if (System.Windows.MessageBox.Show(interrupt_message, warningTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    ReturnToMainMenu();
+                }
             }
         }
 
         private void Image_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ReturnToMainMenu();
+
+            if (System.Windows.MessageBox.Show(interrupt_message, warningTitle, MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                ReturnToMainMenu();
+            }
         }
-        
+
         private void ReturnToMainMenu()
         {
-            if (System.Windows.MessageBox.Show("Do you really want to interrupt editing process? Correction process will not be saved!", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                CheckMenuWindow checkWind = new CheckMenuWindow();
-                checkWind.Show();
-                this.Close();
-            }
+            CheckMenuWindow checkWind = new CheckMenuWindow();
+            checkWind.Show();
+            this.Close();
         }
 
         private void ownVar_textBox_GotFocus(object sender, RoutedEventArgs e)

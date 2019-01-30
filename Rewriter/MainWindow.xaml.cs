@@ -5,10 +5,9 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Rewriter.Configuration;
-using Rewriter.Entity;
-using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Rewriter
 {
@@ -38,13 +37,14 @@ namespace Rewriter
         {
             await Task.Run(() =>            // defining asynchronic operation using lambda expression
             {
-                ProgramOptions.vocabulary.db = new WordContext();
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vocabulary data\\google-10000-english-no-swears.txt");
 
-                ProgramOptions.vocabulary.db.words.Load();
+                string line;
 
-                foreach (Words word in ProgramOptions.vocabulary.db.words) // loading all the words to the comfortable data structure to work
+                StreamReader sr = new StreamReader(path);
+                while ((line = sr.ReadLine()) != null)
                 {
-                    ProgramOptions.vocabulary.words.Add(word.Word);
+                    ProgramOptions.vocabulary.words.Add(line);
                 }
 
                 ProgramOptions.vocabulary.TuneCheckingTools();

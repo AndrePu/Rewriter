@@ -61,7 +61,7 @@ namespace Rewriter {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
-            SplashScreen splashScreen = new SplashScreen("resources/splashscreen.png");
+            SplashScreen splashScreen = new SplashScreen("resources/images/splashscreen.png");
             splashScreen.Show(true);
             Rewriter.App app = new Rewriter.App();
             app.InitializeComponent();

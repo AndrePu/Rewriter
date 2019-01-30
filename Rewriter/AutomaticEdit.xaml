@@ -61,7 +61,7 @@
     </Window.Resources>
 
     <Window.Background>
-        <ImageBrush ImageSource="Resources/Background5.png"/>
+        <ImageBrush ImageSource="Resources/Images/Background5.png"/>
     </Window.Background>
     
     <Grid x:Name="MainGrid">

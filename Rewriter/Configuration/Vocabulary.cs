@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Rewriter.Entity;
 using System.Threading;
 
 namespace Rewriter.Configuration
@@ -21,7 +20,6 @@ namespace Rewriter.Configuration
         object locked = new object();
 
         private bool Tuned { get; set; }                                  // tells whether tools(variables) were tuned for correction process
-        public WordContext db { get; set; }
         public List<string> words = new List<string>();
         private List<CorrectWord> avar = new List<CorrectWord>();          // appropriate variants for words correction (DS for word correction process)
 

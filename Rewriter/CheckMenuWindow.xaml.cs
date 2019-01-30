@@ -227,7 +227,7 @@ namespace Rewriter
         {
             if (ProgramOptions.document.IsOpened())
             {
-                ManualEdit manual_edit = new ManualEdit();
+                ManualEdit manual_edit = new ManualEdit(ProgramOptions.document);
                 manual_edit.Show();
                 this.Close();
             }
@@ -252,7 +252,7 @@ namespace Rewriter
 
 
             string clear_text = ProgramOptions.document.Text.Replace("\n", "").Replace("\r", ""); // text without \n and \r symbols
-            ProgramOptions.document.Sentences = clear_text.Remove(clear_text.Length - 1).Split('!', '?', '.');
+            ProgramOptions.document.Sentences = clear_text.Remove(clear_text.Length - 1).Replace(",", "").Split('!', '?', '.');
 
             ProgramOptions.document.FormWordsToCheck();           // Choose words from sentences that needed to be edited
 

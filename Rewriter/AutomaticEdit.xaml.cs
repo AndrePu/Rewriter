@@ -138,7 +138,7 @@ namespace Rewriter
             {
                 for (int j = 0; j < ProgramOptions.document.words[i].Count; j++)
                 {
-                    if (ProgramOptions.vocabulary.Contains(ProgramOptions.document.words[i][j]) == false)
+                    if (Algorithm.BinarySearch(document.uncorrect_words[i], ProgramOptions.document.words[i][j]) != -1) // if this word is wrong
                     {
                         string correct_word = ProgramOptions.vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
                         ProgramOptions.document.Text = ProgramOptions.document.EditedText.Replace(ProgramOptions.document.words[i][j], correct_word);
@@ -146,7 +146,7 @@ namespace Rewriter
                     }
                     
                     ProgramOptions.document.WordsCheckedAmount++;
-                    Thread.Sleep(10);                                         // TESTING LINE | DELETE!!!!!!              
+                    //Thread.Sleep(10);                                         // TESTING LINE | DELETE!!!!!!              
                 }
             }
             ProgramOptions.document.Checked = true;

@@ -44,11 +44,11 @@
 
         </Image>
 
-    <Viewbox Grid.RowSpan="3" Grid.ColumnSpan="3">
-        <Grid Width="634" Height="450.8">
+        <Viewbox Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <Grid Width="634" Height="450.8">
 
 
-        </Grid>
-    </Viewbox>
-        </Grid>
+            </Grid>
+        </Viewbox>
+    </Grid>
 </Window>

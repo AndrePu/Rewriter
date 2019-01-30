@@ -141,9 +141,11 @@ namespace Rewriter
 
         private void info_button_Click(object sender, RoutedEventArgs e)
         {
+            /* While InfoWindow not done
             InfoWindow info_wind = new InfoWindow();
             info_wind.Show();
             this.Close();
+            */
         }
 
         private void options_button_Click(object sender, RoutedEventArgs e)

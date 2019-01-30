@@ -26,7 +26,7 @@ namespace Rewriter
             SetLanguage();
             SetWindowConfiguration();
         }
-        
+
         #region Window size setting
         private void SetWindowConfiguration()
         {
@@ -80,7 +80,7 @@ namespace Rewriter
         }
 
         #endregion
-        
+
         #region Interactivity
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {

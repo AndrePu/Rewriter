@@ -26,7 +26,7 @@ namespace Rewriter.Configuration
         private List<CorrectWord> avar = new List<CorrectWord>();          // appropriate variants for words correction (DS for word correction process)
 
         private const int cor_variants = 3;                               // amount of variants to correct the word (Needed for manual editing)
-        private const int alength = 6;                               // appropriate Levengshtein distance
+        private const int alength = 10;                               // appropriate Levengshtein distance
         private const double words_part = 0.1;                                // variable for finding amount of threads needed for searching necessary word for correction
         private static int threads_amount;
         private static int wit;                                           //words in every thread                                   
@@ -69,20 +69,12 @@ namespace Rewriter.Configuration
                 }
             }
         }
-        public string CorrectWord(string word_to_correct)
+        private void UseThreads(string word_to_correct)
         {
-            if (!Tuned)
-            {
-                throw (new Exception("Variables for checking were not tuned!"));
-            }
-            bool firstUpper = (word_to_correct[0] >= 'A' && word_to_correct[0] <= 'Z') ? true : false;
-            word_to_correct = word_to_correct.ToLower();
-
-            string corrected_word = word_to_correct;            // in case of bad editing distance we return initial word
             int index = 0;
             avar.Clear();                                       // Clear all the possible variants for the previous word
             List<Thread> threads = new List<Thread>();
-            
+
             for (int i = 0; i < threads_amount; i++)
             {
                 Thread thread = new Thread(() => CorrectRange(index++, word_to_correct));     // creating threads to find appropriate answer 
@@ -98,6 +90,20 @@ namespace Rewriter.Configuration
             {
                 threads[i].Join();
             }
+        }
+
+        public string CorrectWord(string word_to_correct)
+        {
+            if (!Tuned)
+            {
+                throw (new Exception("Variables for checking were not tuned!"));
+            }
+            bool firstUpper = (word_to_correct[0] >= 'A' && word_to_correct[0] <= 'Z') ? true : false;
+            word_to_correct = word_to_correct.ToLower();
+
+            string corrected_word = word_to_correct;            // in case of bad editing distance we return initial word
+
+            UseThreads(word_to_correct);
 
             Algorithm.QuickSort(avar, 0, avar.Count - 1);
             if (avar.Count != 0)
@@ -112,7 +118,7 @@ namespace Rewriter.Configuration
         }
 
         /// <summary>
-        /// Returns words that are most suitable for word correction
+        /// Returns words that are the most suitable for word correction
         /// </summary>
         /// <param name="word_to_correct"></param>
         /// <returns></returns>
@@ -122,21 +128,43 @@ namespace Rewriter.Configuration
             {
                 throw (new Exception("Variables for checking were not tuned!"));
             }
+            bool firstUpper = Algorithm.IsCapitilized(word_to_correct);
+            word_to_correct = word_to_correct.ToLower();
 
             List<string> variants = new List<string>();
-
-            avar.Clear();                                       // CleAR all the previous variants for previous word
+            int index = 0;
+            avar.Clear();                                       // Clear all the possible variants for the previous word
+            List<Thread> threads = new List<Thread>();
 
             for (int i = 0; i < threads_amount; i++)
             {
-                Thread thread = new Thread(() => CorrectRange(i, word_to_correct));     // creating threads to find appropriate answer 
+                Thread thread = new Thread(() => CorrectRange(index++, word_to_correct));     // creating threads to find appropriate answer 
+                threads.Add(thread);
             }
 
+            for (int i = 0; i < threads_amount; i++)
+            {
+                threads[i].Start();
+            }
+
+            for (int i = 0; i < threads_amount; i++)
+            {
+                threads[i].Join();
+            }
+            
             Algorithm.QuickSort(avar,0, avar.Count - 1);
 
             for (int i = 0; i < cor_variants && i < avar.Count; i++)
             {
                 variants.Add(avar[i].Word);
+            }
+
+            if (firstUpper)
+            {
+                for (int i = 0; i < variants.Count; i++)
+                {
+                    variants[i] = Algorithm.Capitilize(variants[i]);
+                }
             }
 
             return variants;

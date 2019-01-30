@@ -44,9 +44,7 @@ X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\ko\System.Windows.Interactivi
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\ru\System.Windows.Interactivity.resources.dll
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\zh-Hans\System.Windows.Interactivity.resources.dll
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\zh-Hant\System.Windows.Interactivity.resources.dll
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\OptionsWindow.g.cs
-X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.baml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\OptionsWindow.baml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\AutomaticEdit.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\ManualEdit.g.cs
@@ -58,4 +56,8 @@ X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.xml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\bin\Debug\EntityFramework.SqlServer.xml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.g.cs
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\CheckMenuWindow.baml
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.g.cs
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\InfoWindow.baml
 X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\Rewriter.csprojResolveAssemblyReference.cache
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\WaitingWindow.g.cs
+X:\Career\ISD\Rewriter\Rewriter\Rewriter\obj\Debug\WaitingWindow.baml

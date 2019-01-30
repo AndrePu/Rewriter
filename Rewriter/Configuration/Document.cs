@@ -21,7 +21,7 @@ namespace Rewriter.Configuration
         private int textChecked;                    // percents of how much of text were checked
 
         public List<List<string>> words = new List<List<string>>();          // all the words in document
-        
+        public List<List<string>> uncorrect_words = new List<List<string>>();
 
         #region Autopropeties of class
         public string Filename
@@ -62,9 +62,11 @@ namespace Rewriter.Configuration
             }
             set
             {
-                edited_text = text;
+                edited_text = value;
+                OnPropertyChanged("EditedText");
             }
         }
+
         public int WordsAmount
         {
             get
@@ -144,14 +146,12 @@ namespace Rewriter.Configuration
                 OnPropertyChanged("TextChecked");
             }
         }
+
         public bool Checked { get; set; } = false;
 
         public string[] Sentences { get; set; }
 
-        #region Variables for manual correcting
-        public int Current_word { get; set; } = 0; // index of currently analysing word among uncorrect ones in sentence
-        public int Current_sentence { get; set; } = 0;   // index currently analysing sentence in text
-        #endregion
+        public int UnWordsAmount { get; set; } // indicates amount of uncorrect words
 
         #endregion
 
@@ -160,18 +160,32 @@ namespace Rewriter.Configuration
         
         public void FormWordsToCheck()
         {
+            HashSet<string> uncorrectWordsSet = new HashSet<string>();  // helps to remove duplicate words for list of uncorrect words
             for (int i = 0; i < Sentences.Length; i++)
             {
                 List<string> words_inCurSen = new List<string>();        // words in current sentence
-                string[] cur_sentence = Sentences[i].Split(' ');
+                List<string> unWords_inCurSen = new List<string>();      // uncorrect words amount in current sentence
 
-                for (int j = 0; j < cur_sentence.Length; j++)
+                string[] wordsInSen = Sentences[i].Split(' ');           //words in sentence
+
+                for (int j = 0; j < wordsInSen.Length; j++)
                 {
-                    if (cur_sentence[j] != String.Empty)
-                        words_inCurSen.Add(cur_sentence[j]);
+                    if (wordsInSen[j] != String.Empty)                   // filter null words (happens when more than one space in sentence was used)
+                    {
+                        words_inCurSen.Add(wordsInSen[j]);
+
+                        if (ProgramOptions.vocabulary.Contains(wordsInSen[j]) == false && !uncorrectWordsSet.Contains(wordsInSen[j]))
+                        {
+                            unWords_inCurSen.Add(wordsInSen[j]);
+                            uncorrectWordsSet.Add(wordsInSen[j]);
+                        }
+                    }
+
+
                 }
 
                 words.Add(words_inCurSen);
+                uncorrect_words.Add(unWords_inCurSen);
             }
         }
 
@@ -184,6 +198,11 @@ namespace Rewriter.Configuration
             for (int i = 0;  i  < words.Count; i++)
             {
                 wordsAmount += words[i].Count;
+            }
+
+            for (int i = 0; i < uncorrect_words.Count; i++)
+            {
+                UnWordsAmount += uncorrect_words[i].Count;
             }
         }
 

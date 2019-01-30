@@ -14,9 +14,9 @@ namespace Rewriter
         const int alph_size = 26;
         const int def_lint = 0;
         const int transpose_cost = 1;
-        const int delete_cost = 2;
-        const int insert_cost = 3;
-        const int replace_cost = 2;
+        const int delete_cost = 4;
+        const int insert_cost = 4;
+        const int replace_cost = 3;
         #endregion
 
         public static int Max(params int[] numbers)
@@ -30,6 +30,7 @@ namespace Rewriter
 
             return max;
         }
+
         public static int Min(params int[] numbers)
         {
             int min = numbers[0];
@@ -41,8 +42,7 @@ namespace Rewriter
 
             return min;
         }
-
-
+        
         #region QuickSort
 
         #region QuickSort for CorrectWord class-list
@@ -184,6 +184,7 @@ namespace Rewriter
         /// <returns></returns>
         public static int DLDistance(string word1, string word2)
         {
+
             #region Corner cases process
             if (word1 == String.Empty && word2 == String.Empty)
             {
@@ -266,7 +267,7 @@ namespace Rewriter
 
         public static string Capitilize(string word)
         {
-            if (word == String.Empty || word[0] <= 'a' || word[0] >= 'z')
+            if (word == String.Empty || word[0] < 'a' || word[0] > 'z')
                 return word;
 
             string wordCapitilized = String.Empty;
@@ -278,6 +279,11 @@ namespace Rewriter
             }
 
             return wordCapitilized;
+        }
+
+        public static bool IsCapitilized(string word)
+        {
+            return word[0] >= 'A' && word[0] <= 'Z';
         }
     }
 }

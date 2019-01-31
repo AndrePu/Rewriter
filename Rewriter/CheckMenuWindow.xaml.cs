@@ -252,7 +252,16 @@ namespace Rewriter
 
 
             string clear_text = ProgramOptions.document.Text.Replace("\n", "").Replace("\r", ""); // text without \n and \r symbols
-            ProgramOptions.document.Sentences = clear_text.Remove(clear_text.Length - 1).Replace(",", "").Split('!', '?', '.');
+
+            string[] sentences = clear_text.Remove(clear_text.Length - 1).Replace(",", "").Split('!', '?', '.');
+
+            foreach (string sentence in sentences)
+            {
+                if (sentence != String.Empty)
+                {
+                    ProgramOptions.document.Sentences.Add(sentence);
+                }
+            }
 
             ProgramOptions.document.FormWordsToCheck();           // Choose words from sentences that needed to be edited
 

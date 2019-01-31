@@ -197,20 +197,10 @@ namespace Rewriter
             #endregion
 
             Dictionary<char, int> lastIndex = new Dictionary<char, int>();                      // Indicates last entrance of each charater in word1 from symbols word1, word2
-            List<List<int>> tab_table = new List<List<int>>();          // Tabulation table used for calculation word distance
+            int[,] tab_table = new int[word1.Length + 1, word2.Length + 1];          // Tabulation table used for calculation word distance
             int INF = (word1.Length + word2.Length) * Max(insert_cost, delete_cost, replace_cost, transpose_cost);  // const
 
             #region Initialize priorly DS
-
-            for (int i = 0; i < word1.Length + 1; i++)
-            {
-                List<int> cur = new List<int>();
-                for (int j = 0; j < word2.Length + 1; j++)
-                {
-                    cur.Add(def_lint);
-                }
-                tab_table.Add(cur);
-            }
 
             foreach (char letter in (word1 + word2))
             {
@@ -221,17 +211,17 @@ namespace Rewriter
 
             #region Forming induction base
 
-            tab_table[0][0] = INF;
+            tab_table[0, 0] = INF;
             for (int i = 0; i < word1.Length; i++)
             {
-                tab_table[i + 1][1] = i * delete_cost;
-                tab_table[i + 1][0] = INF;
+                tab_table[i + 1, 1] = i * delete_cost;
+                tab_table[i + 1, 0] = INF;
             }
 
             for (int j = 0; j < word2.Length; j++)
             {
-                tab_table[1][j + 1] = j * insert_cost;
-                tab_table[0][j + 1] = INF;
+                tab_table[1, j + 1] = j * insert_cost;
+                tab_table[0, j + 1] = INF;
             }
             #endregion
 
@@ -246,22 +236,22 @@ namespace Rewriter
 
                     if (word1[i] == word2[j])   // in case of equality symbols of appropriate words, we don't increase distance for following word prefix
                     {
-                        tab_table[i + 1][j + 1] = tab_table[i][j];
+                        tab_table[i + 1, j + 1] = tab_table[i, j];
                         last = j;
                     }
                     else // finding the optimal value (Levenshtain algorithm part)
                     {
-                        tab_table[i + 1][j + 1] = Min(tab_table[i][j] + replace_cost, tab_table[i + 1][j] + insert_cost,
-                            tab_table[i][j + 1] + delete_cost);
+                        tab_table[i + 1, j + 1] = Min(tab_table[i, j] + replace_cost, tab_table[i + 1, j] + insert_cost,
+                            tab_table[i, j + 1] + delete_cost);
                     }
 
-                    tab_table[i + 1][j + 1] = Min(tab_table[i + 1][j + 1], tab_table[i1][j1] + (i - i1 - 1) * delete_cost + transpose_cost + (j - j1 - 1) * insert_cost);
+                    tab_table[i + 1, j + 1] = Min(tab_table[i + 1, j + 1], tab_table[i1, j1] + (i - i1 - 1) * delete_cost + transpose_cost + (j - j1 - 1) * insert_cost);
                 }
                 lastIndex[word1[i]] = i;
             }
             #endregion
 
-            return tab_table[word1.Length][word2.Length];
+            return tab_table[word1.Length, word2.Length];
         }
         #endregion
 
@@ -284,6 +274,26 @@ namespace Rewriter
         public static bool IsCapitilized(string word)
         {
             return word[0] >= 'A' && word[0] <= 'Z';
+        }
+
+        /// <summary>
+        /// Deletes all the special symbols not related to the word
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public static string CleanWord(string word)
+        {
+            string cleanWord = String.Empty;
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i] >= 'a' && word[i] <= 'z' || word[i] >= 'A' && word[i] <= 'Z')
+                {
+                    cleanWord += word[i];
+                }
+            }
+
+            return cleanWord;
         }
     }
 }

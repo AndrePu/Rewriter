@@ -128,7 +128,6 @@ namespace Rewriter
                 
                 System.IO.File.WriteAllText(filename, ProgramOptions.document.EditedText);
             }
-
             this.Close();
         }
 
@@ -141,7 +140,7 @@ namespace Rewriter
                     if (Algorithm.BinarySearch(document.uncorrect_words[i], ProgramOptions.document.words[i][j]) != -1) // if this word is wrong
                     {
                         string correct_word = ProgramOptions.vocabulary.CorrectWord(ProgramOptions.document.words[i][j]);
-                        ProgramOptions.document.Text = ProgramOptions.document.EditedText.Replace(ProgramOptions.document.words[i][j], correct_word);
+                        ProgramOptions.document.EditedText = ProgramOptions.document.EditedText.Replace(ProgramOptions.document.words[i][j], correct_word);
                         ProgramOptions.document.WordsCorrectedAmount++;
                     }
                     

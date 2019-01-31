@@ -68,7 +68,7 @@
             </Setter>
         </Style>
         <!--#endregion-->
-        
+
         <!--#region Label style-->
         <Style TargetType="{x:Type Label}">
             <Setter Property="Height" Value="30" />
@@ -108,15 +108,13 @@
 
         <!--#region TextBox style-->
         <Style TargetType="{x:Type TextBox}">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
             <Setter Property="VerticalContentAlignment" Value="Top"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="TextWrapping" Value="Wrap" />
             <Setter Property="FontFamily" Value="Nirmalaya UI" />
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <!--#endregion -->
@@ -131,19 +129,23 @@
 
     </Window.Resources>
 
-    <Grid x:Name="MainGrid" Width="Auto" Height="450.4">
+
+    <Grid x:Name="MainGrid">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="384*" />
+            <RowDefinition Height="10*" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="376"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="28*" />
+            <ColumnDefinition Width="320*"/>
+            <ColumnDefinition Width="28*" />
+            <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
 
         <Image Source="Resources/Images/Back.png" Grid.Row="1" Grid.Column="1" MouseDown="Image_MouseDown" Cursor="Hand">
@@ -165,37 +167,58 @@
 
         </Image>
 
-        <TextBox x:Name="text_textBox" Height="400" Width="320" Grid.Row ="1" Grid.Column="2" Grid.RowSpan="3"
+        <TextBox x:Name="text_textBox" Grid.Row ="2" Grid.Column="3"
                  Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=document.EditedText, Mode=OneWay}"/>
 
-        <Grid x:Name="editBlock" Grid.Column="3" HorizontalAlignment="Right" Grid.RowSpan="3" >
+        <Grid x:Name="editBlock" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right" Grid.RowSpan="4" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="120" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="15" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="15*" />
+            </Grid.RowDefinitions>
 
             <!--#region Geometry for borders-->
 
-            <Rectangle/>
-            <Line X1="0" Y1="175" X2="200" Y2="175" />
-            <Line X1="0" Y1="330" X2="200" Y2="330" />
+            <Rectangle Grid.RowSpan="19"/>
+            <Line X1="0" Y1="175" X2="200" Y2="175" Grid.RowSpan="19"/>
+            <Line X1="0" Y1="330" X2="200" Y2="330" Grid.RowSpan="19" />
 
             <!--#endregion -->
 
             <!--#region Word Info Block-->
-            <TextBlock x:Name ="blockName1_textBlock" Text="Mistakes correcting" Margin="0,15,0,0" FontSize="18" FontWeight="Bold" />
+            <TextBlock x:Name ="blockName1_textBlock" Height="22" Text="Mistakes correcting" FontSize="18" FontWeight="Bold" Grid.Row="1" />
 
-            <Rectangle HorizontalAlignment="Center" Height="120" Margin="0,46.387,0,0" Stroke="#FF9600BC" VerticalAlignment="Top" Width="190">
+            <Rectangle HorizontalAlignment="Center" Height="120" Stroke="#FF9600BC" Width="190" Grid.Row="3">
                 <Rectangle.Effect>
                     <ee:EmbossedEffect Color="#FF9600BC"/>
                 </Rectangle.Effect>
             </Rectangle>
 
-            <StackPanel x:Name="word_stackpanel" Height="16" Width="175"  HorizontalAlignment ="Left"  VerticalAlignment="Top" Margin="10,55,0,0" Orientation="Horizontal">
+            <StackPanel x:Name="word_stackpanel" Height="16" Width="175"  HorizontalAlignment ="Left"  VerticalAlignment="Top" Margin="10,5,0,0" Orientation="Horizontal" Grid.Row="3">
 
                 <TextBlock x:Name="wordPinned_textBlock" Text="Word: " FontWeight="Bold" />
                 <TextBlock x:Name="word_textBlock" Text="Some_word_to_edit" />
 
             </StackPanel>
 
-
-            <TextBlock x:Name="sentence_textBlock" Height="Auto" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Nirmalaya UI" FontSize="14" Foreground="White" TextWrapping="Wrap" Margin="0,80.756,0,0">
+            <TextBlock x:Name="sentence_textBlock" Height="Auto" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Nirmalaya UI" FontSize="14" Foreground="White" TextWrapping="Wrap" Margin="0,25,0,0" Grid.Row="3">
                 <Run x:Name="sentencePinned" Text="In sentence: "  FontWeight="Bold" />
                 <Run Text=" "/><Run x:Name="sentence" Text="I have lost my teeth." FontStyle="Italic"/>
             </TextBlock>
@@ -205,20 +228,21 @@
 
             <!--#region Correction block-->
 
-            <TextBlock x:Name ="blockName2_textBlock" Text="Variants to correct" Margin="0,179.757,0,0" FontSize="18" FontWeight="Bold" />
+            <TextBlock x:Name ="blockName2_textBlock" Text="Variants to correct" FontSize="18" FontWeight="Bold" Grid.Row="5"/>
 
-            <Button x:Name ="firstVar_button" Margin="0,214.187,0,0" Content="First variant" Click="firstVar_button_Click" />
+            <Button x:Name ="firstVar_button" Content="First variant" Click="firstVar_button_Click" Grid.Row="7"/>
 
-            <Button x:Name ="secondVar_button" Margin="15,252.187,15,0" Content="Second variant" Click="secondVar_button_Click" />
+            <Button x:Name ="secondVar_button" Content="Second variant" Click="secondVar_button_Click" Grid.Row="9"/>
 
-            <Button  x:Name ="thirdVar_button" Margin="15,290.187,15,0" Content="Third variant" Click="thirdVar_button_Click" />
+            <Button  x:Name ="thirdVar_button" Content="Third variant" Click="thirdVar_button_Click" Grid.Row="11"/>
 
-            <Button x:Name ="addWord_button" Margin="15,338.187,15,0" Content="Add to vocabulary" Click="addWord_button_Click" />
+            <Button x:Name ="addWord_button" Content="Add to vocabulary" Click="addWord_button_Click" Grid.Row="13"/>
 
-            <Button x:Name ="ownVar_button" Margin="15,376.187,15,0" Content="Add own variant" Click="ownVar_button_Click" />
+            <Button x:Name ="ownVar_button" Content="Add own variant" Click="ownVar_button_Click" Grid.Row="15" />
 
-            <TextBox x:Name="ownVar_textBox" Height="30" Width="170" Margin="0,410,0,0" Text="Please,enter your variant.."
-                         VerticalContentAlignment="Center" Foreground="LightGray" BorderThickness="2" FontFamily="Arial Rounded MT Bold" FontSize="12" GotFocus="ownVar_textBox_GotFocus" LostFocus="ownVar_textBox_LostFocus" >
+            <TextBox x:Name="ownVar_textBox" Height="30" Width="170" Text="Please,enter your variant.." Grid.Row="17"
+                         VerticalContentAlignment="Center" Foreground="LightGray" BorderThickness="2" FontFamily="Arial Rounded MT Bold" FontSize="12" 
+                     GotFocus="ownVar_textBox_GotFocus" LostFocus="ownVar_textBox_LostFocus" >
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF00C500" Offset="0"/>

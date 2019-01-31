@@ -149,39 +149,33 @@ namespace Rewriter.Configuration
 
         public bool Checked { get; set; } = false;
 
-        public string[] Sentences { get; set; }
+        public List<string> Sentences { get; set; } = new List<string>();
 
         public int UnWordsAmount { get; set; } // indicates amount of uncorrect words
 
         #endregion
-
-
+        
         #region Methods
         
         public void FormWordsToCheck()
         {
             HashSet<string> uncorrectWordsSet = new HashSet<string>();  // helps to remove duplicate words for list of uncorrect words
-            for (int i = 0; i < Sentences.Length; i++)
+            for (int i = 0; i < Sentences.Count; i++)
             {
-                List<string> words_inCurSen = new List<string>();        // words in current sentence
-                List<string> unWords_inCurSen = new List<string>();      // uncorrect words amount in current sentence
+                List<string> words_inCurSen = new List<string>(
+                                              from word in Sentences[i].Split(' ')
+                                              where word != String.Empty
+                                              select Algorithm.CleanWord(word));
 
-                string[] wordsInSen = Sentences[i].Split(' ');           //words in sentence
+                List<string> unWords_inCurSen = new List<string>();      // uncorrect words in current sentence
 
-                for (int j = 0; j < wordsInSen.Length; j++)
+                for (int j = 0; j < words_inCurSen.Count; j++)
                 {
-                    if (wordsInSen[j] != String.Empty)                   // filter null words (happens when more than one space in sentence was used)
+                    if (ProgramOptions.vocabulary.Contains(words_inCurSen[j]) == false && !uncorrectWordsSet.Contains(words_inCurSen[j]))
                     {
-                        words_inCurSen.Add(wordsInSen[j]);
-
-                        if (ProgramOptions.vocabulary.Contains(wordsInSen[j]) == false && !uncorrectWordsSet.Contains(wordsInSen[j]))
-                        {
-                            unWords_inCurSen.Add(wordsInSen[j]);
-                            uncorrectWordsSet.Add(wordsInSen[j]);
-                        }
+                        unWords_inCurSen.Add(words_inCurSen[j]);
+                        uncorrectWordsSet.Add(words_inCurSen[j]);
                     }
-
-
                 }
 
                 words.Add(words_inCurSen);
@@ -191,7 +185,7 @@ namespace Rewriter.Configuration
 
         public void GetInfo()
         {
-            sentencesAmount = Sentences.Length;
+            sentencesAmount = Sentences.Count;
 
             symbolsAmount = Text.Length;
             

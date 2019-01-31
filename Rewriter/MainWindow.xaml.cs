@@ -37,19 +37,20 @@ namespace Rewriter
         {
             await Task.Run(() =>            // defining asynchronic operation using lambda expression
             {
+                SortedSet<string> sortedWords = new SortedSet<string>();
                 string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Vocabulary data\\google-10000-english-no-swears.txt");
 
                 string line;
-
                 StreamReader sr = new StreamReader(path);
+
                 while ((line = sr.ReadLine()) != null)
                 {
-                    ProgramOptions.vocabulary.words.Add(line);
+                    sortedWords.Add(line);
                 }
 
-                ProgramOptions.vocabulary.TuneCheckingTools();
-                Algorithm.QuickSort(ProgramOptions.vocabulary.words, 0, ProgramOptions.vocabulary.words.Count - 1);      // Sort all our values
-                //MessageBox.Show("Database was loaded!");                    // TESTING LINE | DELETE
+                ProgramOptions.vocabulary.words = new List<string>(sortedWords);
+
+                ProgramOptions.vocabulary.TuneCheckingTools();                
             });
         }
         #endregion

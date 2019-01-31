@@ -34,7 +34,7 @@ namespace Rewriter.Configuration
 
         public void TuneCheckingTools()
         {
-            threads_amount = (int)(words.Count * words_part) + 1;
+            threads_amount = 4;
             wit = words.Count / threads_amount;
 
             Tuned = true;
@@ -75,7 +75,9 @@ namespace Rewriter.Configuration
 
             for (int i = 0; i < threads_amount; i++)
             {
-                Thread thread = new Thread(() => CorrectRange(index++, word_to_correct));     // creating threads to find appropriate answer 
+                Thread thread = new Thread(() => CorrectRange(index++, word_to_correct));     // creating threads to find appropriate answer
+                //index++;
+
                 threads.Add(thread);
             }
 

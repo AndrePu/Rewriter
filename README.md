@@ -6,4 +6,4 @@ In this program you can use autochecking to your text and also manual word corre
 File path: \Rewriter\bin\Debug\Rewriter.exe
 
 
-Autochecking process now has a good spead
+Autochecking process now has a good speed
